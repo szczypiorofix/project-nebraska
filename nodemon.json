@@ -1,0 +1,10 @@
+{
+    "env": {
+        "MONGO_USER": "your-username",
+        "MONGO_PASSWORD": "your-password",
+        "MONGO_DB": "your-db-name"
+    },
+    "watch": ["server"],
+    "ext": "ts",
+    "exec": "ts-node --project tsconfig.server.json ./server/index.ts"
+}

@@ -6,7 +6,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "SET BUILD_PATH=./build/client && react-scripts build",
-        "circleci-build": "BUILD_PATH='./build/client'react-scripts build",
+        "circleci-build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "server:start": "tsc --project tsconfig.server.json && node build/index.js",

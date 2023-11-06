@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:21.1.0
     steps:
       - checkout
       - run: npm install

@@ -1,14 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React, { render, screen } from '@testing-library/react';
 import { MainView } from './views/main-view/MainView';
 
-it("renders without crashing", () => {
-    const root: ReactDOM.Root = ReactDOM.createRoot(
-        document.getElementById("root") as HTMLElement,
-    );
-    root.render(
-        <React.StrictMode>
-            <MainView />
-        </React.StrictMode>,
-    );
+test('renders react component', () => {
+    render(<MainView />);
+    const divElement = screen.getByText(/MAIN VIEW/i);
+    expect(divElement).toBeInTheDocument();
 });

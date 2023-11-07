@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import "./index.scss";
 import { MainView } from "./views/main-view/MainView";
+
+import "./index.scss";
 
 const root: ReactDOM.Root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -10,5 +11,5 @@ const root: ReactDOM.Root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <MainView />
-  </React.StrictMode>,
+  </React.StrictMode>
 );

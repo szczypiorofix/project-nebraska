@@ -28,7 +28,7 @@ export function useLocalStorage<T>(defaultValue: T, objectName: string): [T, (sa
         localStorage.setItem(objectName, objectAsString);
     }
     const load = (): void => {
-        const objStr: string = localStorage.getItem(objectName) ?? "";
+        const objStr: string = localStorage.getItem(objectName) ?? "{}";
         let obj: T = defaultValue;
         try {
             obj = JSON.parse(objStr);

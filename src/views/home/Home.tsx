@@ -1,10 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
 
-import "./MainView.scss";
+import "./Home.scss";
 
-export const MainView: React.FC = () => {
-
+export const Home: React.FC = () => {
     const Title = styled.h1`
       font-size: 1.5em;
       text-align: center;
@@ -14,7 +13,7 @@ export const MainView: React.FC = () => {
     return (
       <div className="main-view-background">
           <div className="container main-view">
-              <Title>MAIN VIEW</Title>
+              <Title>HOME</Title>
           </div>
       </div>
     );

@@ -6,7 +6,6 @@ import {
   headerMiddleware,
   loggerMiddleware,
 } from "./middleware/app.middleware";
-import { loginRouter } from "./routes/login.controller";
 import { rootRouter } from './routes/root.controller';
 
 dotenv.config({ path: __dirname+'/.env' });
@@ -22,10 +21,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
-app.use("/api/login", loginRouter);
-
-// Standard ping test connection
 app.use("/", rootRouter);
+
+app.use("*", (req, res) => {
+  res.status(404).json({});
+})
 
 app.listen(PORT, (): void => {
   console.log(`Server running at http://localhost:${PORT}`);

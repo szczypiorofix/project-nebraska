@@ -1,5 +1,6 @@
 import express, { Request, Response, Router } from "express";
-import { ServerResponse } from "../../models/response.model";
+import { ServerResponse } from "../../../models/response.model";
+import { tokenRouter } from './token.controller';
 
 const loginRouter: Router = express.Router();
 
@@ -15,5 +16,7 @@ loginRouter.get("/", (request: Request, response: Response) => {
   };
   response.status(resp.code).json(resp).end();
 });
+
+loginRouter.use("/token", tokenRouter);
 
 export { loginRouter };

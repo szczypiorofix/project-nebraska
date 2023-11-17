@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { ServerResponse } from "../../models/response.model";
-import { loginRouter } from './login.controller';
+import { loginRouter } from './login/login.controller';
 
 const apiRouter: Router = express.Router();
 

@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { ServerResponse } from "../../models/response.model";
-import { loginRouter } from './login/login.controller';
+import loginRouter from './login/login.controller';
 
 const apiRouter: Router = express.Router();
 
@@ -15,4 +15,4 @@ apiRouter.get("/", (request: Request, response: Response) => {
 
 apiRouter.use("/login", loginRouter);
 
-export { apiRouter };
+export default apiRouter;

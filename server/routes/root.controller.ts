@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { ServerResponse } from "../models/response.model";
-import { apiRouter } from './api/api.controller';
+import apiRouter from './api/api.controller';
 
 const rootRouter: Router = express.Router();
 
@@ -15,4 +15,4 @@ rootRouter.get("/", (req: Request, res: Response): void => {
 
 rootRouter.use('/api', apiRouter);
 
-export { rootRouter };
+export default rootRouter;

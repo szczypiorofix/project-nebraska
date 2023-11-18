@@ -8,11 +8,14 @@ class TokenHelper {
     }
 
     public static generateAccessToken(username: string) {
-        const tokenSecret = process.env.TOKEN_SECRET;
+        const tokenSecret: string = process.env.TOKEN_SECRET;
         if (!tokenSecret) {
             throw new Error("No environmental variable: TOKEN_SECRET !");
         }
-        return  JWT.sign( { username: username }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 });
+        if (!username || username.length < 3) {
+            throw new Error("No user name or name too short (min. 3 chars)!");
+        }
+        return JWT.sign( { username: username }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 });
     }
 
 }

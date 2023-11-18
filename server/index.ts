@@ -6,7 +6,7 @@ import {
   headerMiddleware,
   loggerMiddleware,
 } from "./middleware/app.middleware";
-import { rootRouter } from './routes/root.controller';
+import rootRouter from './routes/root.controller';
 
 dotenv.config({ path: __dirname+'/.env' });
 

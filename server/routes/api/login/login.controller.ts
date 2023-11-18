@@ -1,11 +1,13 @@
 import express, { Request, Response, Router } from "express";
 import { ServerResponse } from "../../../models/response.model";
-import { tokenRouter } from './token.controller';
+import tokenRouter from './token.controller';
 
 const loginRouter: Router = express.Router();
 
+loginRouter.use("/token", tokenRouter);
+
 loginRouter.post("/", (request: Request, response: Response) => {
-  response.status(200).json({}).end();
+  response.status(200).json({});
 });
 
 loginRouter.get("/", (request: Request, response: Response) => {
@@ -14,9 +16,7 @@ loginRouter.get("/", (request: Request, response: Response) => {
     error: true,
     message: "Unauthorized access",
   };
-  response.status(resp.code).json(resp).end();
+  response.status(resp.code).json(resp);
 });
 
-loginRouter.use("/token", tokenRouter);
-
-export { loginRouter };
+export default loginRouter;

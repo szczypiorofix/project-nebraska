@@ -10,16 +10,17 @@ tokenRouter.get("/", (request: Request, response: Response) => {
         error: false,
         message: TokenHelper.generateSecretToken()
     };
-    response.status(resp.code).json(resp).end();
+    response.status(resp.code).json(resp);
 });
 
 tokenRouter.post("/", (request: Request, response: Response) => {
     if (request.body.username) {
         const token = TokenHelper.generateAccessToken(request.body.username);
-        response.json(token);
+        response.status(200).json(token).end();
+        return;
     }
-    response.status(401).json({}).end();
+    response.status(401).json({});
 });
 
-export { tokenRouter };
+export default tokenRouter;
 

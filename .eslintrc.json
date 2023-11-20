@@ -18,5 +18,22 @@
         "react"
     ],
     "rules": {
-    }
+        "no-unused-expressions": "error",
+        "no-unused-labels": "error",
+        "no-var": "error",
+        "no-eval": "error",
+        "no-empty": "error",
+        "no-empty-function": "error",
+        "no-fallthrough": "error",
+        "no-underscore-dangle": "error"
+    },
+    "overrides": [
+        {
+            "files": ["src/**/*.ts"],
+            "parser": "@typescript/eslint-parser",
+            "rules": {
+                "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
+            }
+        }
+    ]
 }

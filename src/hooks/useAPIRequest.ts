@@ -14,11 +14,13 @@ export const useAPIRequest = <T,>( url: string, defaultValue: T): [ ( requestOpt
                     console.error( JSON.stringify( response ) );
                     const responseText = await response.text();
                     console.error( responseText );
-                    throw new Error("An error occurred! " + responseText );
+                    setErrorMessage( "API request error: " + responseText.toString() );
+                    setLoading(false );
+                    setHasError(true );
                 }
                 setLoading(false);
                 setResponse( ( await response.json() ) as T);
-            } catch ( e: any ) {
+            } catch ( e ) {
                 console.error("useAPIRequest: ", e );
                 setErrorMessage( "API request error: " + e.toString() );
                 setLoading(false );

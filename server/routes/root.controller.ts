@@ -10,7 +10,7 @@ rootRouter.get("/", (req: Request, res: Response): void => {
         message: "OK",
         error: false
     }
-    res.status(200).send(resp);
+    res.status(200).json(resp);
 });
 
 rootRouter.use('/api', apiRouter);

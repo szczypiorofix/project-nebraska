@@ -16,7 +16,7 @@ tokenRouter.get("/", (request: Request, response: Response) => {
 tokenRouter.post("/", (request: Request, response: Response) => {
     if (request.body.username) {
         const token = TokenHelper.generateAccessToken(request.body.username);
-        response.status(200).json(token).end();
+        response.status(200).json(token);
         return;
     }
     response.status(401).json({});

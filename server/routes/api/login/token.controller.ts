@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { ServerResponse } from "../../../models/response.model";
+import { ServerResponse } from "../../../../shared/response.model";
 import TokenHelper from '../../../helpers/token.helper';
 
 const tokenRouter: Router = express.Router();

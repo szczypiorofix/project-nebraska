@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { ServerResponse } from "../models/response.model";
+import { ServerResponse } from "../../shared/response.model";
 import apiRouter from './api/api.controller';
 
 const rootRouter: Router = express.Router();

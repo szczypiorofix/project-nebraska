@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { Row } from '../../shared/components/Row';
 import { Navbar } from '../../shared/components/Navbar';
@@ -6,22 +6,26 @@ import { Button } from '../../shared/components/Button';
 import { Footer } from '../../shared/components/Footer';
 import { NetworkIndicator } from './parts/NetworkIndicator';
 import { Container } from '../../shared/components/Container';
+import { useAPIRequest } from '../../hooks/useAPIRequest';
+import { ServerResponse } from '../../../shared/response.model';
 
 export const Admin = (): React.JSX.Element => {
-    const [serverStatusOk, setServerStatusOk] = useState<boolean>(false);
-    useEffect(() => {
-        if (!serverStatusOk) {
-            fetch("http://localhost:8080/api/status/")
-                .then(resp => resp.json())
-                .then(r => {
-                    console.log(r);
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-            setServerStatusOk(true);
+    const [ execute, response, loading, hasError, errorMessage ] = useAPIRequest<ServerResponse>(
+        "http://localhost:8080/api/status",
+        {
+            error: false,
+            code: -1,
+            message: ""
         }
-    }, []);
+    );
+
+    useEffect(() => {
+        console.log(response);
+        console.log(loading);
+        console.log(hasError);
+        console.log(errorMessage);
+    }, [response, hasError]);
+
     return <Row>
         <Navbar>
             <h2>Main menu</h2>
@@ -33,7 +37,7 @@ export const Admin = (): React.JSX.Element => {
             <Button
                 title={ "Connect" }
                 onClick={ () => {
-                    console.log('click');
+                    execute({});
                 }}
             ></Button>
         </Container>

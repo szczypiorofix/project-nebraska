@@ -1,13 +1,13 @@
 import express, { Request, Response, Router } from "express";
-import { ServerResponse } from "../../models/response.model";
+import { ServerResponse } from "../../../shared/response.model";
 
 const statusRouter: Router = express.Router();
 
 statusRouter.get("/", (request: Request, response: Response) => {
     const resp: ServerResponse = {
-        code: 200,
         error: false,
-        message: "OK",
+        code: 200,
+        message: "OK"
     };
     response.status(resp.code).json(resp);
 });

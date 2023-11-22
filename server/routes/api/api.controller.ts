@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { ServerResponse } from "../../models/response.model";
+import { ServerResponse } from "../../../shared/response.model";
 import loginRouter from './login/login.controller';
 import statusRouter from './status.controller';
 

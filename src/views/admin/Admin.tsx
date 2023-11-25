@@ -29,26 +29,24 @@ export const Admin = (): React.JSX.Element => {
                 title={ "Connect" }
                 onClick={ () => {
                     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
-                    (async () => {
-                        try {
-                            const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status", {});
-                            console.log(response);
-                            setConnectionStatus(CONNECTION_STATUS.CONNECTED);
-                        } catch(err) {
-                            console.error(err);
-                            setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
-                        }
-                    })();
+                    setTimeout( () => {
+                        (async () => {
+                            try {
+                                const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status", {});
+                                console.log(response);
+                                setConnectionStatus(CONNECTION_STATUS.CONNECTED);
+                            } catch(err) {
+                                console.error(err);
+                                setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
+                            }
+                        })();
+                    }, 2000);
                 }}
             ></Button>
-        </Container>
-        <Container>
             <p>{ connectionStatus }</p>
+            <NetworkIndicator status={ connectionStatus }/>
         </Container>
         <Footer>
-            <Container>
-                <NetworkIndicator status={ connectionStatus }/>
-            </Container>
         </Footer>
     </Row>
 }

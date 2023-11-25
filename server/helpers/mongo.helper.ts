@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 class MongoHelper {
   public static async connect() {
-    const mongoDBName: string = process.env.MONGO_DB_STRING ?? "";
+    const { MONGO_DB_STRING } = process.env;
     return new Promise((resolve, reject): void => {
         mongoose
-            .connect(mongoDBName)
+            .connect(MONGO_DB_STRING)
             .then((): void => {
                 resolve(mongoose.connection);
             })

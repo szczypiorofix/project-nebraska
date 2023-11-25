@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import * as dotenv from "dotenv";
@@ -6,8 +6,7 @@ import {
   headerMiddleware,
   loggerMiddleware,
 } from "./middleware/app.middleware";
-import { loginRouter } from "./routes/login.controller";
-import MongoHelper from './helpers/mongo.helper';
+import rootRouter from './routes/root.controller';
 
 dotenv.config({ path: __dirname+'/.env' });
 
@@ -22,21 +21,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
-app.use("/api/login", loginRouter);
+app.use("/", rootRouter);
 
-app.get("/", (req: Request, res: Response): void => {
-  MongoHelper.connect()
-      .then((connection) => {
-          console.log("Connection established...");
-          console.log(connection)
-
-          res.status(200).send("OK");
-      })
-      .catch(err => {
-        console.error(err);
-      });
-
-});
+app.use("*", (req, res) => {
+  res.status(404).json({});
+})
 
 app.listen(PORT, (): void => {
   console.log(`Server running at http://localhost:${PORT}`);

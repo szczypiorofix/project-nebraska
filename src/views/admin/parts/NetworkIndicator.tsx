@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CONNECTION_STATUS } from '../Admin';
 
 export interface NetworkIndicatorProps {
-    isActive?: boolean;
+    status: CONNECTION_STATUS;
 }
 
 const NetworkSignalContainer = styled.div`
@@ -18,17 +19,28 @@ const NetworkSignalLabel = styled.p`
     padding: 8px 12px;
 `;
 
-const NetworkSignal= styled.div<{ $active?: boolean }>`
+const NetworkSignal= styled.div<{ $statusColor?: string }>`
     width: 12px;
     height: 12px;
-    background-color: ${ props => props.$active ? "green" : 'red' };
+    background-color: ${ props => props.$statusColor };
     border: none;
     border-radius: 50%;
 `;
 
 export const NetworkIndicator = ( props: NetworkIndicatorProps ): React.JSX.Element => {
+    const statusResolver = (status: CONNECTION_STATUS): string => {
+      switch (status) {
+        case CONNECTION_STATUS.CONNECTING:
+          return "yellow";
+        case CONNECTION_STATUS.CONNECTED:
+            return "green";
+        default:
+          return "red";
+      }
+    };
+
     return <NetworkSignalContainer>
         <NetworkSignalLabel>Network: </NetworkSignalLabel>
-        <NetworkSignal $active={props.isActive}/>
+        <NetworkSignal $statusColor={ statusResolver( props.status ) }/>
     </NetworkSignalContainer>
 }

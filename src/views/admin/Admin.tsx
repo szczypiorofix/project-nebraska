@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Row } from '../../shared/components/Row';
 import { Navbar } from '../../shared/components/Navbar';
@@ -6,26 +6,17 @@ import { Button } from '../../shared/components/Button';
 import { Footer } from '../../shared/components/Footer';
 import { NetworkIndicator } from './parts/NetworkIndicator';
 import { Container } from '../../shared/components/Container';
-import { useAPIRequest } from '../../hooks/useAPIRequest';
+import useRequest from '../../hooks/useRequest';
 import { ServerResponse } from '../../../shared/response.model';
 
+export enum CONNECTION_STATUS {
+    DISCONNECTED = "rozłączony",
+    CONNECTING = "łączenie",
+    CONNECTED = "połączony"
+}
+
 export const Admin = (): React.JSX.Element => {
-    const [ execute, response, loading, hasError, errorMessage ] = useAPIRequest<ServerResponse>(
-        "http://localhost:8080/api/status",
-        {
-            error: false,
-            code: -1,
-            message: ""
-        }
-    );
-
-    useEffect(() => {
-        console.log(response);
-        console.log(loading);
-        console.log(hasError);
-        console.log(errorMessage);
-    }, [response, hasError]);
-
+    const [connectionStatus, setConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
     return <Row>
         <Navbar>
             <h2>Main menu</h2>
@@ -37,13 +28,26 @@ export const Admin = (): React.JSX.Element => {
             <Button
                 title={ "Connect" }
                 onClick={ () => {
-                    execute({});
+                    setConnectionStatus(CONNECTION_STATUS.CONNECTING);
+                    (async () => {
+                        try {
+                            const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status", {});
+                            console.log(response);
+                            setConnectionStatus(CONNECTION_STATUS.CONNECTED);
+                        } catch(err) {
+                            console.error(err);
+                            setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
+                        }
+                    })();
                 }}
             ></Button>
         </Container>
+        <Container>
+            <p>{ connectionStatus }</p>
+        </Container>
         <Footer>
             <Container>
-                <NetworkIndicator isActive={ true }/>
+                <NetworkIndicator status={ connectionStatus }/>
             </Container>
         </Footer>
     </Row>

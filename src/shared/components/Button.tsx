@@ -43,7 +43,7 @@ const styleProps: ComponentStyleProps = {
 
 export const Button = ( props: ButtonProps ): React.JSX.Element => {
     return<CustomButton
-        $buttonProps={ styleProps }
-        onClick={ props.onClick }
+        $buttonProps={styleProps}
+        onClick={props.onClick}
     >{props.title}</CustomButton>
 }

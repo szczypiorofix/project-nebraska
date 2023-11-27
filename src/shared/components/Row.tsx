@@ -10,6 +10,6 @@ const CustomRow = styled.div`
 
 export const Row: React.FC<Props>= ({ children }) => {
     return <CustomRow>
-        { children }
+        {children}
     </CustomRow>
 }

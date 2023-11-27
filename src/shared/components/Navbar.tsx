@@ -9,6 +9,6 @@ const CustomNavbar = styled.nav`
 
 export const Navbar: React.FC<Props>= ( props: Props ) => {
     return <CustomNavbar>
-        { props.children }
+        {props.children}
     </CustomNavbar>
 }

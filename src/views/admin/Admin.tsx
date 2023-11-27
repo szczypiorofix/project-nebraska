@@ -17,6 +17,7 @@ export enum CONNECTION_STATUS {
 
 export const Admin = (): React.JSX.Element => {
     const [connectionStatus, setConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
+    const [dbConnectionStatus, setDBConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
     return <Row>
         <Navbar>
             <h2>Main menu</h2>
@@ -24,27 +25,45 @@ export const Admin = (): React.JSX.Element => {
         <Container>
             <h1>ADMIN PANEL</h1>
         </Container>
-        <Container>
+        <Container flex={true}>
             <Button
-                title={ "Connect" }
+                title={ "Server" }
                 onClick={ () => {
                     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
-                    setTimeout( () => {
-                        (async () => {
-                            try {
-                                const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status", {});
-                                console.log(response);
-                                setConnectionStatus(CONNECTION_STATUS.CONNECTED);
-                            } catch(err) {
-                                console.error(err);
-                                setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
-                            }
-                        })();
-                    }, 2000);
+                    (async () => {
+                        try {
+                            const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status/server", {});
+                            console.log(response);
+                            setConnectionStatus(CONNECTION_STATUS.CONNECTED);
+                        } catch(err) {
+                            console.error(err);
+                            setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
+                        }
+                    })();
                 }}
             ></Button>
             <p>{ connectionStatus }</p>
             <NetworkIndicator status={ connectionStatus }/>
+        </Container>
+        <Container flex={true}>
+            <Button
+                title={ "MongoDB" }
+                onClick={ () => {
+                    setDBConnectionStatus(CONNECTION_STATUS.CONNECTING);
+                    (async () => {
+                        try {
+                            const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status/mongodb", {});
+                            console.log(response);
+                            setDBConnectionStatus(CONNECTION_STATUS.CONNECTED);
+                        } catch(err) {
+                            console.error(err);
+                            setDBConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
+                        }
+                    })();
+                }}
+            ></Button>
+            <p>{ dbConnectionStatus }</p>
+            <NetworkIndicator status={ dbConnectionStatus }/>
         </Container>
         <Footer>
         </Footer>

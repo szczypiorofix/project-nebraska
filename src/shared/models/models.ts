@@ -10,3 +10,7 @@ export interface ComponentStyleProps {
 export type Props = {
     children?: string | React.JSX.Element | React.JSX.Element[];
 };
+
+export type ContainerProps = {
+    flex?: boolean;
+}

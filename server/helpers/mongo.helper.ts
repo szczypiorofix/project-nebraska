@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 class MongoHelper {
-  public static async connect() {
+  public static async connect(): Promise<mongoose.Connection> {
     const { MONGO_DB_STRING } = process.env;
     return new Promise((resolve, reject): void => {
         mongoose

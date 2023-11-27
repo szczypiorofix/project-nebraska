@@ -17,6 +17,9 @@ GET http://localhost:8080/ HTTP/1.1
 GET http://localhost:8080/api/ HTTP/1.1
 ###
 
+GET http://localhost:8080/api/status HTTP/1.1
+###
+
 GET http://localhost:8080/api/status/server HTTP/1.1
 ###
 

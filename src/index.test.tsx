@@ -1,8 +1,8 @@
 import React, { render, screen } from '@testing-library/react';
-import { Home } from './views/home/Home';
+import { Admin } from './views/admin/Admin';
 
 test('renders react component', () => {
-    render(<Home />);
-    const divElement = screen.getByText(/Main menu/i);
+    render(<Admin />);
+    const divElement = screen.getByText(/ADMIN PANEL/i);
     expect(divElement).toBeInTheDocument();
 });

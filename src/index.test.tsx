@@ -3,6 +3,6 @@ import { Home } from './views/home/Home';
 
 test('renders react component', () => {
     render(<Home />);
-    const divElement = screen.getByText(/MAIN VIEW/i);
+    const divElement = screen.getByText(/Main menu/i);
     expect(divElement).toBeInTheDocument();
 });

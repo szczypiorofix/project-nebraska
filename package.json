@@ -1,18 +1,19 @@
 {
     "name": "project-nebraska",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
+    "homepage": ".",
     "proxy": "http://localhost:8080",
     "scripts": {
         "start": "react-scripts start",
-        "build": "SET BUILD_PATH=./build/client && react-scripts build",
-        "circleci-build": "react-scripts build",
+        "build": "react-scripts build",
+        "build:launch": "serve -s -d build -l 80",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "server:start": "tsc --project tsconfig.server.json && node build/index.js",
+        "server:start": "tsc --project tsconfig.server.json && node build-server/index.js",
         "server:build": "tsc --project tsconfig.server.json",
         "server:dev": "nodemon",
-        "server:go": "ts-node --project tsconfig.server.json ./server/index.ts"
+        "server:build:launch": "node ./build-server/index.js"
     },
     "browserslist": {
         "production": [

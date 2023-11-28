@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import { Admin } from './views/admin/Admin';
+import App from './App';
 
 import "./index.scss";
 
@@ -10,6 +10,6 @@ const root: ReactDOM.Root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <Admin />
+        <App />
     </React.StrictMode>
 );

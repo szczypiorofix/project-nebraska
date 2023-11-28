@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run: npm install
       - run: git log --oneline --decorate > public/changelog.txt
-      - run: npm run circleci-build
+      - run: npm run build
       - run: npm test
 workflows:
   version: 2

@@ -10,7 +10,7 @@ loginRouter.post("/", (request: Request, response: Response) => {
   response.status(200).json({});
 });
 
-loginRouter.get("/", (request: Request, response: Response) => {
+loginRouter.post("/", (request: Request, response: Response) => {
   const resp: ServerResponse = {
     code: 401,
     error: true,

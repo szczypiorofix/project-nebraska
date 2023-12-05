@@ -17,13 +17,8 @@ const Title = styled.h1`
 export const Home: React.FC = () => {
     const { setView } = React.useContext(AppContext) as AppContextType;
     return (
-      <div className="main-view-background">
-          <div className="container main-view">
-              <Title>HOME</Title>
-          </div>
-          <Container>
-              <Button title={ "ADMIN" } onClick={ () => setView(APP_VIEW.MAIN) } ></Button>
-          </Container>
-      </div>
+        <Container>
+            <Button title={ "ADMIN" } onClick={ () => setView(APP_VIEW.ADMIN) } ></Button>
+        </Container>
     );
 };

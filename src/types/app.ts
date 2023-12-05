@@ -5,8 +5,8 @@ export interface IApp {
 
 export enum APP_VIEW {
     SPLASH,
-    MAIN,
-    DASHBOARD
+    HOME,
+    ADMIN
 }
 
 export type AppContextType = {

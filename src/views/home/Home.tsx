@@ -1,10 +1,12 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
 
 import { AppContext } from '../../context/AppContext';
-import { AppContextType } from '../../types/app';
+import { APP_VIEW, AppContextType } from '../../types/app';
 
-import "./Home.scss";
+import './Home.scss';
+import { Container } from '../../shared/components/Container';
+import { Button } from '../../shared/components/Button';
 
 const Title = styled.h1`
     font-size: 1.5em;
@@ -19,6 +21,9 @@ export const Home: React.FC = () => {
           <div className="container main-view">
               <Title>HOME</Title>
           </div>
+          <Container>
+              <Button title={ "ADMIN" } onClick={ () => setView(APP_VIEW.MAIN) } ></Button>
+          </Container>
       </div>
     );
 };

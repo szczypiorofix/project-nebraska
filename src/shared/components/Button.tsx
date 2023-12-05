@@ -34,7 +34,7 @@ const CustomButton = styled.button<{ $buttonProps?: ComponentStyleProps; }>`
   font-size: 18px;
 `;
 
-const styleProps: ComponentStyleProps = {
+const buttonStyleProps: ComponentStyleProps = {
     color: "#EEEEEE",
     backgroundColor: "#4318FF",
     margin: "0",
@@ -43,7 +43,7 @@ const styleProps: ComponentStyleProps = {
 
 export const Button = ( props: ButtonProps ): React.JSX.Element => {
     return<CustomButton
-        $buttonProps={styleProps}
+        $buttonProps={buttonStyleProps}
         onClick={props.onClick}
     >{props.title}</CustomButton>
 }

@@ -41,7 +41,7 @@ const buttonStyleProps: ComponentStyleProps = {
     padding: "0"
 }
 
-export const Button = ( props: ButtonProps ): React.JSX.Element => {
+export const Button = (props: ButtonProps): React.JSX.Element => {
     return<CustomButton
         $buttonProps={buttonStyleProps}
         onClick={props.onClick}

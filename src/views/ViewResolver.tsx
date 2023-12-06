@@ -6,6 +6,7 @@ import { Button } from '../shared/components/Button';
 import { SplashScreen } from './splash/SplashScreen';
 import { Admin } from './admin/Admin';
 import { Home } from './home/Home';
+import { Header } from '../components/Header';
 
 const ViewResolver: React.FC = () => {
     const { app, setView } = React.useContext(AppContext) as AppContextType;
@@ -26,6 +27,9 @@ const ViewResolver: React.FC = () => {
     }
 
     return <Container>
+        <Header>
+
+        </Header>
         <Container>
             <Button title={ "SPLASH" } onClick={ () => setCurrentView(APP_VIEW.SPLASH) }></Button>
             <Button title={ "HOME" } onClick={ () => setCurrentView(APP_VIEW.HOME) }></Button>

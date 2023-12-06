@@ -9,7 +9,7 @@ const CustomContainer = styled.div<{ $flex?: boolean }>`
     margin: 10px 0;
 `;
 
-export const Container: React.FC<Props & ContainerProps>= ( props: Props & ContainerProps ) => {
+export const Container: React.FC<Props & ContainerProps>= (props: Props & ContainerProps) => {
     return <CustomContainer $flex = {!!props.flex}>
         { props.children }
     </CustomContainer>

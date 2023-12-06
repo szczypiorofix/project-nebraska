@@ -7,7 +7,7 @@ const CustomNavbar = styled.nav`
     margin: 0 auto;
 `;
 
-export const Navbar: React.FC<Props>= ( props: Props ) => {
+export const Navbar: React.FC<Props>= (props: Props) => {
     return <CustomNavbar>
         {props.children}
     </CustomNavbar>

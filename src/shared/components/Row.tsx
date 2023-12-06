@@ -8,8 +8,8 @@ const CustomRow = styled.div`
     margin: 0 auto;
 `;
 
-export const Row: React.FC<Props>= ({ children }) => {
+export const Row: React.FC<Props>= (props: Props) => {
     return <CustomRow>
-        {children}
+        {props.children}
     </CustomRow>
 }

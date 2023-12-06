@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Row } from '../../shared/components/Row';
 import { Navbar } from '../../shared/components/Navbar';
 import { Button } from '../../shared/components/Button';
-import { Footer } from '../../shared/components/Footer';
+import { Footer } from '../../components/Footer';
 import { NetworkIndicator } from './parts/NetworkIndicator';
 import { Container } from '../../shared/components/Container';
 import useRequest from '../../hooks/useRequest';

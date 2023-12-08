@@ -6,9 +6,9 @@ import { Button } from '../shared/components/Button';
 import { SplashScreen } from './splash/SplashScreen';
 import { Admin } from './admin/Admin';
 import { Home } from './home/Home';
-import { Header } from '../components/Header';
-import { Main } from '../components/Main';
-import { Footer } from '../components/Footer';
+import { Header } from '../components/header-component/Header';
+import { Main } from '../components/main-component/Main';
+import { Footer } from '../components/footer-component/Footer';
 
 const ViewResolver: React.FC = () => {
     const { app, setView } = React.useContext(AppContext) as AppContextType;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props } from '../shared/models/models';
+import { Props } from '../../shared/models/models';
 import styled from 'styled-components';
 
 const HeaderComponent = styled.header`

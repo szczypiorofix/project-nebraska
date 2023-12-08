@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContainerProps, Props } from '../shared/models/models';
+import { ContainerProps, Props } from '../../shared/models/models';
 import styled from 'styled-components';
 
 const CustomFooter = styled.footer`

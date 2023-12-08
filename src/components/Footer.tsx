@@ -1,8 +1,14 @@
 import React from 'react';
-import { Props } from '../shared/models/models';
+import { ContainerProps, Props } from '../shared/models/models';
+import styled from 'styled-components';
 
-export const Footer: React.FC<Props>= (props: Props) => {
-    return <footer>
-        {props.children}
-    </footer>
+const CustomFooter = styled.footer`
+    display: block;
+    width: 100%;
+`;
+
+export const Footer: React.FC<Props & ContainerProps>= (props: Props) => {
+    return <CustomFooter>
+        { props.children }
+    </CustomFooter>
 }

@@ -5,13 +5,9 @@ import ViewResolver from './views/ViewResolver';
 
 export const App: React.FC = () => {
     return (
-        <div className="main-view-background">
-            <div className="container main-view">
-                <AppProvider>
-                    <ViewResolver />
-                </AppProvider>
-            </div>
-        </div>
+        <AppProvider>
+            <ViewResolver />
+        </AppProvider>
     );
 }
 

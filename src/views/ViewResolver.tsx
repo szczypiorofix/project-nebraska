@@ -7,6 +7,8 @@ import { SplashScreen } from './splash/SplashScreen';
 import { Admin } from './admin/Admin';
 import { Home } from './home/Home';
 import { Header } from '../components/Header';
+import { Main } from '../components/Main';
+import { Footer } from '../components/Footer';
 
 const ViewResolver: React.FC = () => {
     const { app, setView } = React.useContext(AppContext) as AppContextType;
@@ -26,19 +28,26 @@ const ViewResolver: React.FC = () => {
         setView(view);
     }
 
-    return <Container>
+    return <>
         <Header>
+            <div style={{ minHeight: "32px" }}>
 
+            </div>
         </Header>
-        <Container>
-            <Button title={ "SPLASH" } onClick={ () => setCurrentView(APP_VIEW.SPLASH) }></Button>
-            <Button title={ "HOME" } onClick={ () => setCurrentView(APP_VIEW.HOME) }></Button>
-            <Button title={ "ADMIN" } onClick={ () => setCurrentView(APP_VIEW.ADMIN) }></Button>
-        </Container>
-        <Container>
-            { resolveView() }
-        </Container>
-    </Container>
+        <Main>
+            <Container>
+                <Button title={ "SPLASH" } onClick={ () => setCurrentView(APP_VIEW.SPLASH) }></Button>
+                <Button title={ "HOME" } onClick={ () => setCurrentView(APP_VIEW.HOME) }></Button>
+                <Button title={ "ADMIN" } onClick={ () => setCurrentView(APP_VIEW.ADMIN) }></Button>
+            </Container>
+            <Container>
+                { resolveView() }
+            </Container>
+        </Main>
+        <Footer>
+
+        </Footer>
+    </>
 }
 
 export default ViewResolver;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Row } from '../../shared/components/Row';
-import { Navbar } from '../../shared/components/Navbar';
 import { Button } from '../../shared/components/Button';
 import { Footer } from '../../components/footer-component/Footer';
 import { NetworkIndicator } from './parts/NetworkIndicator';
@@ -19,9 +18,6 @@ export const Admin = (): React.JSX.Element => {
     const [connectionStatus, setConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
     const [dbConnectionStatus, setDBConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
     return <Row>
-        <Navbar>
-            <h2>Main menu</h2>
-        </Navbar>
         <Container>
             <h1>ADMIN PANEL</h1>
         </Container>
@@ -52,7 +48,7 @@ export const Admin = (): React.JSX.Element => {
                     setDBConnectionStatus(CONNECTION_STATUS.CONNECTING);
                     (async () => {
                         try {
-                            const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status/mongodb", {});
+                            const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status/mongodb" );
                             console.log(response);
                             setDBConnectionStatus(CONNECTION_STATUS.CONNECTED);
                         } catch(err) {

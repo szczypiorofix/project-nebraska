@@ -3,12 +3,21 @@ import styled from 'styled-components';
 
 import { Props } from '../models/models';
 
-const CustomNavbar = styled.nav`
+const NavbarStyled = styled.nav`
     margin: 0 auto;
 `;
 
-export const Navbar: React.FC<Props>= (props: Props) => {
-    return <CustomNavbar>
+const NavbarTitle = styled.h1`
+    color: darkblue;
+`;
+
+interface NavbarProps {
+    title?: string;
+}
+
+export const Navbar: React.FC<Props & NavbarProps>= (props: Props & NavbarProps) => {
+    return <NavbarStyled>
+        {props.title && <NavbarTitle>{props.title}</NavbarTitle>}
         {props.children}
-    </CustomNavbar>
+    </NavbarStyled>
 }

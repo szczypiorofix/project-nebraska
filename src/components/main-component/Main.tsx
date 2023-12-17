@@ -6,6 +6,7 @@ import { ContainerProps, Props } from '../../shared/models/models';
 const CustomMain = styled.main`
     display: block;
     width: 100%;
+    background-color: #F3F4F7;
 `;
 
 export const Main: React.FC<Props & ContainerProps>= (props: Props) => {

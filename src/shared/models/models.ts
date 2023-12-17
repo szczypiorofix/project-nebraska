@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactHTMLElement } from 'react';
 
 export interface ComponentStyleProps {
     color: string;
@@ -10,6 +10,21 @@ export interface ComponentStyleProps {
 export type Props = {
     children?: string | React.JSX.Element | React.JSX.Element[];
 };
+
+// export type ListProps = {
+//     children?: string | React.JSX.Element | React.JSX.Element[] | React.ReactHTMLElement<HTMLUListElement>[];
+// }
+
+export interface ListProps<T> {
+    items: T[];
+    renderItem: (item: T, index: number, array: T[]) => React.ReactNode;
+}
+
+export interface ButtonProps {
+    title: string;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    children?: string | React.JSX.Element | React.JSX.Element[];
+}
 
 export type ContainerProps = {
     flex?: boolean;

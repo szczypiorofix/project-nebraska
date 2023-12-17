@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ComponentStyleProps } from '../models/models';
-
-export interface ButtonProps {
-    title: string;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+import { ButtonProps, ComponentStyleProps, Props } from '../models/models';
 
 const CustomButton = styled.button<{ $buttonProps?: ComponentStyleProps; }>`
   padding: 0.5em 1.5em;
@@ -41,7 +36,7 @@ const buttonStyleProps: ComponentStyleProps = {
     padding: "0"
 }
 
-export const Button = (props: ButtonProps): React.JSX.Element => {
+export const Button: React.FC<ButtonProps> = (props: ButtonProps): React.JSX.Element => {
     return<CustomButton
         $buttonProps={buttonStyleProps}
         onClick={props.onClick}

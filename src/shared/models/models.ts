@@ -11,10 +11,6 @@ export type Props = {
     children?: string | React.JSX.Element | React.JSX.Element[];
 };
 
-// export type ListProps = {
-//     children?: string | React.JSX.Element | React.JSX.Element[] | React.ReactHTMLElement<HTMLUListElement>[];
-// }
-
 export interface ListProps<T> {
     items: T[];
     renderItem: (item: T, index: number, array: T[]) => React.ReactNode;

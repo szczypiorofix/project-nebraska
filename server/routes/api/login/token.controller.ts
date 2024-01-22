@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { ServerResponse } from "../../../../shared/response.model";
-import TokenHelper from '../../../helpers/token.helper';
+import TokenHelper from '../../../helpers/jwtoken/token.helper';
 
 const tokenRouter: Router = express.Router();
 

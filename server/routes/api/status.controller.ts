@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { MongoDBResponse, ServerResponse } from '../../../shared/response.model';
-import MongoHelper from '../../helpers/mongo.helper';
+import MongoHelper from '../../helpers/mongodb/mongo.helper';
 import mongoose from 'mongoose';
 
 const statusRouter: Router = express.Router();

@@ -7,6 +7,7 @@ import { NetworkIndicator } from './parts/NetworkIndicator';
 import { Container } from '../../shared/components/Container';
 import useRequest from '../../hooks/useRequest';
 import { ServerResponse } from '../../../shared/response.model';
+import HttpResolver from '../../resolvers/HttpResolver';
 
 export enum CONNECTION_STATUS {
     DISCONNECTED = "rozłączony",
@@ -26,6 +27,19 @@ export const Admin = (): React.JSX.Element => {
                 title={ "Server" }
                 onClick={ () => {
                     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
+
+
+
+                    // HttpService - for request
+
+                    // -> HttpResolver - for handling response
+
+
+                    const resolver = new HttpResolver();
+                    resolver.resolve();
+
+
+
                     (async () => {
                         try {
                             const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status/server", {});

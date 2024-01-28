@@ -12,8 +12,11 @@ class TokenHelper {
         if (!tokenSecret) {
             throw new Error("No environmental variable: TOKEN_SECRET !");
         }
-        if (!username || username.length < 3) {
-            throw new Error("No user name or name too short (min. 3 chars)!");
+        if (!username) {
+            throw new Error("No user name!");
+        }
+        if (username.length < 3) {
+            throw new Error("User name too short (min. 3 chars)!");
         }
         return JWT.sign( { username: username }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 });
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ContainerProps, Props } from '../../shared/models/models';
+import { ContainerProps, Props } from '../../shared/models';
 
 const CustomMain = styled.main`
     display: block;

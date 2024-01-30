@@ -18,6 +18,8 @@ export const viewNameResolve = (app: APP_VIEW): string => {
             return "STRONA GŁÓWNA";
         case APP_VIEW.SPLASH:
             return "URUCHAMIANIE";
+        case APP_VIEW.LOGIN:
+            return "LOGOWANIE";
         default:
                 return "";
     }

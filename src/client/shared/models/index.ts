@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactHTMLElement } from 'react';
+import React from 'react';
 
 export interface ComponentStyleProps {
     color: string;

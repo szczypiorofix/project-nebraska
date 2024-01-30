@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-import { ButtonProps, ComponentStyleProps } from '../models/models';
+import { ComponentStyleProps } from '../../models';
 
 const CustomButton = styled.button<{ $buttonProps?: ComponentStyleProps; }>`
   padding: 0.5em 1.5em;
@@ -29,18 +28,14 @@ const CustomButton = styled.button<{ $buttonProps?: ComponentStyleProps; }>`
   font-size: 18px;
 `;
 
-const buttonStyleProps: ComponentStyleProps = {
+const ButtonStyleProps: ComponentStyleProps = {
     color: "#EEEEEE",
     backgroundColor: "#4318FF",
     margin: "0",
     padding: "0"
 }
 
-const Button: React.FC<ButtonProps> = (props: ButtonProps): React.JSX.Element => {
-    return<CustomButton
-        $buttonProps={buttonStyleProps}
-        onClick={props.onClick}
-    >{props.title}</CustomButton>
-}
-
-export default Button;
+export {
+    CustomButton,
+    ButtonStyleProps
+};

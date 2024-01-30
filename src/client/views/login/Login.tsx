@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 
+import { Container, Row } from '../../shared/components';
+import { 
+    FormComponent,
+    InputComponents,
+    LabelComponent,
+    SubmitButtonComponent
+} from './Login.style';
+
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -18,22 +26,22 @@ const Login: React.FC = () => {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Username:
-                    <input type="text" value={username} onChange={handleUsernameChange} />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input type="password" value={password} onChange={handlePasswordChange} />
-                </label>
-                <br />
-                <button type="submit">Login</button>
-            </form>
-        </div>
+        <Container>
+            <Row>
+                <h1>Login</h1>
+            </Row>
+            <Row>
+                <FormComponent onSubmit={handleSubmit}>
+                    <LabelComponent>Username:</LabelComponent>
+                    <InputComponents type="text" value={username} onChange={handleUsernameChange} />
+                    <br />
+                    <LabelComponent>Password:</LabelComponent>
+                    <InputComponents type="password" value={password} onChange={handlePasswordChange} />
+                    <br />
+                    <SubmitButtonComponent type="submit">Login</SubmitButtonComponent>
+                </FormComponent>
+            </Row>
+        </Container>
     );
 };
 

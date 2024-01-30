@@ -1,16 +1,16 @@
 import React from 'react';
 import { AppContext } from '../context/AppContext';
-import { APP_VIEW, AppContextType, viewNameResolve } from '../types/app';
-import Container from '../shared/components/Container';
-import Button from '../shared/components/Button';
+import { APP_VIEW, AppContextType, viewNameResolve } from '../types';
+import Container from '../shared/components/container/Container';
+import Button from '../shared/components/buttonn/Button';
 import { SplashScreen } from './splash/SplashScreen';
 import Admin from './admin/Admin';
 import Home from './home/Home';
 import { Header } from '../components/header-component/Header';
 import { Main } from '../components/main-component/Main';
 import { Footer } from '../components/footer-component/Footer';
-import Navbar from '../shared/components/Navbar';
-import UnorderedList from '../shared/components/UnorderedList';
+import Navbar from '../shared/components/navbar/Navbar';
+import UnorderedList from '../shared/components/unorderedlist/UnorderedList';
 import Login from './login/Login';
 
 const ViewResolver: React.FC = () => {
@@ -58,6 +58,10 @@ const ViewResolver: React.FC = () => {
                 <Button
                     title={ "ADMIN" }
                     onClick={ () => setCurrentView(APP_VIEW.ADMIN) }
+                />
+                <Button
+                    title={ "LOGIN" }
+                    onClick={ () => setCurrentView(APP_VIEW.LOGIN) }
                 />
             </Container>
             <Container>

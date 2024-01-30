@@ -1,11 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import { ContainerProps, Props } from '../models/models';
-
-const CustomContainer = styled.div<{ $flex?: boolean }>`
-    display: ${ (props) => props.$flex ? "flex" : 'block' };
-`;
+import { ContainerProps, Props } from '../../models';
+import { CustomContainer } from './Container.style';
 
 const Container: React.FC<Props & ContainerProps>= (props: Props & ContainerProps) => {
     return <CustomContainer $flex = {!!props.flex}>

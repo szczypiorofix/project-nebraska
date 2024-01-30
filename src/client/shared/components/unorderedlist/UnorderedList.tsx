@@ -1,11 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
-import { ListProps } from '../models/models';
-
-
-const UnorderedListStyled = styled.ul`
-    margin: 0 auto;
-`;
+import { ListProps } from '../../models';
+import { UnorderedListStyled } from './UnorderdList.style';
 
 const UnorderedList = <T extends {}>( list: ListProps<T>) => {
     return <UnorderedListStyled>

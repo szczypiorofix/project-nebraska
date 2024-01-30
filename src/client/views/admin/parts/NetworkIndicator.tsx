@@ -1,31 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { CONNECTION_STATUS } from '../../../../shared/response.model';
+
+import { CONNECTION_STATUS } from '../../../../shared';
+import { NetworkSignal, NetworkSignalContainer, NetworkSignalLabel } from './NetworkIndicator.stylle';
 
 export interface NetworkIndicatorProps {
     status: CONNECTION_STATUS;
 }
-
-const NetworkSignalContainer = styled.div`
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-`;
-
-const NetworkSignalLabel = styled.p`
-    margin: 0;
-    padding: 8px 12px;
-`;
-
-const NetworkSignal= styled.div<{ $statusColor?: string }>`
-    width: 12px;
-    height: 12px;
-    background-color: ${ props => props.$statusColor };
-    border: none;
-    border-radius: 50%;
-`;
 
 export const NetworkIndicator = ( props: NetworkIndicatorProps ): React.JSX.Element => {
     const statusResolver = (status: CONNECTION_STATUS): string => {

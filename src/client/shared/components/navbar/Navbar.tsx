@@ -1,15 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import { Props } from '../models/models';
-
-const NavbarStyled = styled.nav`
-    margin: 0 auto;
-`;
-
-const NavbarTitle = styled.h1`
-    color: darkblue;
-`;
+import { Props } from '../../models';
+import { NavbarStyled, NavbarTitle } from './Navbar.style';
 
 interface NavbarProps {
     title?: string;

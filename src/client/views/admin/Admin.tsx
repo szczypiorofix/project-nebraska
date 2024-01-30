@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import { Footer } from '../../components/footer-component/Footer';
 import { NetworkIndicator } from './parts/NetworkIndicator';
 import HttpResolver from '../../resolvers/HttpResolver';
 import HttpService from '../../services/HttpService';
@@ -61,8 +60,6 @@ const Admin = (): React.JSX.Element => {
             <p>{ dbConnectionStatus }</p>
             <NetworkIndicator status={ dbConnectionStatus }/>
         </Container>
-        <Footer>
-        </Footer>
     </Row>
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Props } from '../shared/models/models';
 import { APP_VIEW, AppContextType, IApp } from '../types/app';
 import { initialContextState } from './initialContextState';
+import { Props } from '../shared/models/models';
 
 export const AppContext: React.Context<AppContextType> = React.createContext<AppContextType>(initialContextState);
 

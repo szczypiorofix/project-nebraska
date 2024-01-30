@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ButtonProps, ComponentStyleProps, Props } from '../models/models';
+import { ButtonProps, ComponentStyleProps } from '../models/models';
 
 const CustomButton = styled.button<{ $buttonProps?: ComponentStyleProps; }>`
   padding: 0.5em 1.5em;

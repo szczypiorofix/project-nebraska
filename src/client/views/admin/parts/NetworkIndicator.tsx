@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CONNECTION_STATUS } from '../Admin';
+import { CONNECTION_STATUS } from '../../../../shared/response.model';
 
 export interface NetworkIndicatorProps {
     status: CONNECTION_STATUS;

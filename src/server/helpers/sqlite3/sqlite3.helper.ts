@@ -5,8 +5,6 @@ class Sqlite3Helper {
 
     private db: sqlite3.Database;
 
-    public constructor() {}
-
     public init(): void {
         sqlite3.verbose();
         this.db = new Database('db.sqlite3');

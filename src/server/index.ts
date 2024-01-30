@@ -4,8 +4,8 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import { headerMiddleware, loggerMiddleware, } from './middleware/app.middleware';
 import rootRouter from './routes/root.controller';
-import Sqlite3Helper from "./helpers/sqlite3/sqlite3.helper";
 import session from 'express-session';
+import Sqlite3Helper from './helpers/sqlite3/sqlite3.helper';
 
 dotenv.config({ path: __dirname+'/.env' });
 

@@ -5,15 +5,9 @@ import { Button } from '../../shared/components/Button';
 import { Footer } from '../../components/footer-component/Footer';
 import { NetworkIndicator } from './parts/NetworkIndicator';
 import { Container } from '../../shared/components/Container';
-import useRequest from '../../hooks/useRequest';
-import { ServerResponse } from '../../../shared/response.model';
 import HttpResolver from '../../resolvers/HttpResolver';
-
-export enum CONNECTION_STATUS {
-    DISCONNECTED = "rozłączony",
-    CONNECTING = "łączenie",
-    CONNECTED = "połączony"
-}
+import HttpService from '../../services/HttpService';
+import { CONNECTION_STATUS, ServerResponse } from '../../../shared';
 
 export const Admin = (): React.JSX.Element => {
     const [connectionStatus, setConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
@@ -28,21 +22,15 @@ export const Admin = (): React.JSX.Element => {
                 onClick={ () => {
                     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
 
-
-
                     // HttpService - for request
-
                     // -> HttpResolver - for handling response
-
 
                     const resolver = new HttpResolver();
                     resolver.resolve();
 
-
-
                     (async () => {
                         try {
-                            const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status/server", {});
+                            const response: ServerResponse = await HttpService.get("http://localhost:8080/api/status/server");
                             console.log(response);
                             setConnectionStatus(CONNECTION_STATUS.CONNECTED);
                         } catch(err) {
@@ -50,7 +38,7 @@ export const Admin = (): React.JSX.Element => {
                             setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
                         }
                     })();
-                }}
+                } }
             ></Button>
             <p>{ connectionStatus }</p>
             <NetworkIndicator status={ connectionStatus }/>
@@ -62,7 +50,7 @@ export const Admin = (): React.JSX.Element => {
                     setDBConnectionStatus(CONNECTION_STATUS.CONNECTING);
                     (async () => {
                         try {
-                            const response: ServerResponse = await useRequest<ServerResponse>("http://localhost:8080/api/status/mongodb" );
+                            const response: ServerResponse = await HttpService.get("http://localhost:8080/api/status/mongodb");
                             console.log(response);
                             setDBConnectionStatus(CONNECTION_STATUS.CONNECTED);
                         } catch(err) {

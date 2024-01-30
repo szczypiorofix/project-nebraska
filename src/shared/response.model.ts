@@ -11,3 +11,9 @@ export interface MongoDBData {
 export interface MongoDBResponse {
     data?: MongoDBData;
 }
+
+export enum CONNECTION_STATUS {
+    DISCONNECTED = "rozłączony",
+    CONNECTING = "łączenie",
+    CONNECTED = "połączony"
+}

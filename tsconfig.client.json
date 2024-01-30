@@ -22,5 +22,11 @@
         "composite": true
     },
     "extends": "./tsconfig.client.json",
-    "include": ["./src/**/*.ts"]
+    "include": ["./src/**/*.ts"],
+    "references": [
+        {
+            "path": "./shared",
+            "prepend": true
+        }
+    ]
 }

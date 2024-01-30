@@ -6,7 +6,8 @@ export interface IApp {
 export enum APP_VIEW {
     SPLASH,
     HOME,
-    ADMIN
+    ADMIN,
+    LOGIN
 }
 
 export const viewNameResolve = (app: APP_VIEW): string => {

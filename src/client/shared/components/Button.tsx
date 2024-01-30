@@ -36,9 +36,11 @@ const buttonStyleProps: ComponentStyleProps = {
     padding: "0"
 }
 
-export const Button: React.FC<ButtonProps> = (props: ButtonProps): React.JSX.Element => {
+const Button: React.FC<ButtonProps> = (props: ButtonProps): React.JSX.Element => {
     return<CustomButton
         $buttonProps={buttonStyleProps}
         onClick={props.onClick}
     >{props.title}</CustomButton>
 }
+
+export default Button;

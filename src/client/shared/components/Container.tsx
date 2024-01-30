@@ -7,8 +7,10 @@ const CustomContainer = styled.div<{ $flex?: boolean }>`
     display: ${ (props) => props.$flex ? "flex" : 'block' };
 `;
 
-export const Container: React.FC<Props & ContainerProps>= (props: Props & ContainerProps) => {
+const Container: React.FC<Props & ContainerProps>= (props: Props & ContainerProps) => {
     return <CustomContainer $flex = {!!props.flex}>
         { props.children }
     </CustomContainer>
 }
+
+export default Container;

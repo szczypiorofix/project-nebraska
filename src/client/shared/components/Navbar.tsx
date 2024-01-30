@@ -15,9 +15,11 @@ interface NavbarProps {
     title?: string;
 }
 
-export const Navbar: React.FC<Props & NavbarProps>= (props: Props & NavbarProps) => {
+const Navbar: React.FC<Props & NavbarProps>= (props: Props & NavbarProps) => {
     return <NavbarStyled>
         {props.title && <NavbarTitle>{props.title}</NavbarTitle>}
         {props.children}
     </NavbarStyled>
 }
+
+export default Navbar;

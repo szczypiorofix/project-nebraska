@@ -1,16 +1,17 @@
 import React from 'react';
 import { AppContext } from '../context/AppContext';
 import { APP_VIEW, AppContextType, viewNameResolve } from '../types/app';
-import { Container } from '../shared/components/Container';
-import { Button } from '../shared/components/Button';
+import Container from '../shared/components/Container';
+import Button from '../shared/components/Button';
 import { SplashScreen } from './splash/SplashScreen';
-import { Admin } from './admin/Admin';
-import { Home } from './home/Home';
+import Admin from './admin/Admin';
+import Home from './home/Home';
 import { Header } from '../components/header-component/Header';
 import { Main } from '../components/main-component/Main';
 import { Footer } from '../components/footer-component/Footer';
-import { Navbar } from '../shared/components/Navbar';
-import { UnorderedList } from '../shared/components/UnorderedList';
+import Navbar from '../shared/components/Navbar';
+import UnorderedList from '../shared/components/UnorderedList';
+import Login from './login/Login';
 
 const ViewResolver: React.FC = () => {
     const { app, setView } = React.useContext(AppContext) as AppContextType;
@@ -21,6 +22,8 @@ const ViewResolver: React.FC = () => {
             return <Home></Home>
         case APP_VIEW.ADMIN:
             return <Admin></Admin>
+        case APP_VIEW.LOGIN:
+            return <Login></Login>
         default:
             return <SplashScreen></SplashScreen>
         }

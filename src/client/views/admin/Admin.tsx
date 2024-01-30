@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 
-import { Row } from '../../shared/components/Row';
-import { Button } from '../../shared/components/Button';
 import { Footer } from '../../components/footer-component/Footer';
 import { NetworkIndicator } from './parts/NetworkIndicator';
-import { Container } from '../../shared/components/Container';
 import HttpResolver from '../../resolvers/HttpResolver';
 import HttpService from '../../services/HttpService';
 import { CONNECTION_STATUS, ServerResponse } from '../../../shared';
+import { Row, Button, Container } from '../../shared/components';
 
-export const Admin = (): React.JSX.Element => {
+const Admin = (): React.JSX.Element => {
     const [connectionStatus, setConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
     const [dbConnectionStatus, setDBConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
     return <Row>
@@ -67,3 +65,5 @@ export const Admin = (): React.JSX.Element => {
         </Footer>
     </Row>
 }
+
+export default Admin;;

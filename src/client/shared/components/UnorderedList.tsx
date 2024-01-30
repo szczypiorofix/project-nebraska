@@ -7,8 +7,10 @@ const UnorderedListStyled = styled.ul`
     margin: 0 auto;
 `;
 
-export const UnorderedList = <T extends {}>( list: ListProps<T>) => {
+const UnorderedList = <T extends {}>( list: ListProps<T>) => {
     return <UnorderedListStyled>
         {list.items.map(list.renderItem)}
     </UnorderedListStyled>
 }
+
+export default UnorderedList;

@@ -1,18 +1,32 @@
 
-export type AppConfigValue = boolean | number | string;
-
-export enum AppConfigKeys {
-    VERSION = "Version",
-    PORT = "Port",
-    TARGET = "Target"
+export enum TargetCofiguration {
+    DEVELOPMENT,
+    PRODUCTION,
+    TEST
 }
 
-export type AppConfig<T> = {
-    [keys in keyof T]: AppConfigValue;
+export interface AppConfig {
+    target: TargetCofiguration;
+    api: {
+        baseUrl: string;
+    };
+}
+
+const LocalhostConfig: AppConfig = {
+    target: TargetCofiguration.DEVELOPMENT,
+    api: {
+        baseUrl: "http://localhost:3000/api",
+    },
 };
 
-const defaultAppConfig: AppConfig<typeof AppConfigKeys> = {
-    VERSION: "1.0",
-    TARGET: "development",
-    PORT: 80
-}
+
+const DomainConfig: AppConfig = {
+    target: TargetCofiguration.PRODUCTION,
+    api: {
+        baseUrl: "https://api.domain.com/api",
+    },
+};
+
+export const AppMode: TargetCofiguration = TargetCofiguration.DEVELOPMENT;
+
+export const CurrentAppConfig: AppConfig = LocalhostConfig;

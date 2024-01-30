@@ -1,11 +1,16 @@
-import { Resolver } from './Resolver';
+import { ServerResponse } from '../../shared';
+import Resolver from './Resolver';
 
-class HttpResolver implements Resolver{
-
+class HttpResolver extends Resolver<ServerResponse> {
     public resolve() {
-        console.log("HttpResolver:resolve");
-    };
-
+        return new Promise<ServerResponse>((resolve, reject) => {
+            resolve({
+                code: 200,
+                error: false,
+                message: 'OK',
+            });
+        });
+    }
 }
 
 export default HttpResolver;

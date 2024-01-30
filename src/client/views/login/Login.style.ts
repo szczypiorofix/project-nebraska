@@ -2,7 +2,10 @@ import styled from 'styled-components';
 
 const FormComponent = styled.form`
     padding: 20px 0;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
 `;
 
 const LabelComponent = styled.label`
@@ -39,9 +42,17 @@ const SubmitButtonComponent = styled.button`
     }
 `;
 
+const InputGroupComponent = styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+`;
+
 export {
     FormComponent,
     LabelComponent,
     InputComponents,
+    InputGroupComponent,
     SubmitButtonComponent
 };

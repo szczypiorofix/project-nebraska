@@ -14,5 +14,11 @@
     },
     "lib": ["es2021"],
     "extends": "./tsconfig.json",
-    "include": ["./server/**/*.ts", "./shared/**/*.ts"]
+    "include": ["./server/**/*.ts", "./shared/**/*.ts"],
+    "references": [
+        {
+            "path": "./shared",
+            "prepend": true
+        }
+    ]
 }

@@ -1,7 +1,13 @@
+import { User } from './user.model';
+
 export interface ServerResponse {
     error: boolean;
     code: number;
     message: string;
+}
+
+export interface ServerUsersResponse extends ServerResponse {
+    data?: User[];
 }
 
 export interface MongoDBData {

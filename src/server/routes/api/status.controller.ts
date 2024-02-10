@@ -1,7 +1,8 @@
-import express, { Request, Response, Router } from "express";
+import express, { Request, Response, Router } from 'express';
 import { MongoDBResponse, ServerResponse } from '../../../shared/response.model';
 import MongoHelper from '../../helpers/mongodb/mongo.helper';
 import mongoose from 'mongoose';
+import MongoClient from '../../core/MongoClient';
 
 const statusRouter: Router = express.Router();
 
@@ -21,7 +22,8 @@ statusRouter.get("/mongodb", async (request: Request, response: Response) => {
         message: "MongoDB connected"
     };
     try {
-        const connection: mongoose.Connection = await MongoHelper.connect();
+        const mongoClient = MongoClient.getInstance();
+        const connection: mongoose.Connection = await mongoClient.connect();
         resp.message = "Connected to MongoDB"; //JSON.stringify(connectionObject.db.databaseName);
         resp.data = {
             dbname: connection.db.databaseName

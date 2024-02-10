@@ -1,4 +1,4 @@
-import { ServerResponse } from '../../shared/response.model';
+import { ServerResponse } from '../../shared';
 
 class HttpService {
 

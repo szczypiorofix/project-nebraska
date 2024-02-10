@@ -1,11 +1,12 @@
-import express, { Express } from 'express';
+import express, { Express, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
+import session from 'express-session';
+
 import { headerMiddleware, loggerMiddleware, } from './middleware/app.middleware';
 import rootRouter from './routes/root.controller';
-import session from 'express-session';
-import Sqlite3Helper from './helpers/sqlite3/sqlite3.helper';
+import MongoDBService from './services/mongodb.service';
 
 dotenv.config({ path: __dirname+'/.env' });
 
@@ -30,14 +31,17 @@ app.use(session({
 // Routes
 app.use("/", rootRouter);
 
-app.use("*", (req, res) => {
+app.use("*", (req: Request, res: Response) => {
   res.status(404).json({});
 })
 
-const sqlite3Helper = new Sqlite3Helper();
-sqlite3Helper.init();
-sqlite3Helper.close();
-
 app.listen(PORT, (): void => {
-  console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
+    const mongoService: MongoDBService = new MongoDBService();
+    mongoService.connect().then((connection) => {
+        console.log('MongoDB connected');
+    })
+    .catch(err => {
+        console.error('MongoDB connection error', err);
+    });
 });

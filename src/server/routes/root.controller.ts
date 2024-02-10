@@ -1,5 +1,5 @@
-import express, { Request, Response, Router } from "express";
-import { ServerResponse } from "../../shared/response.model";
+import express, { Request, Response, Router } from 'express';
+import { ServerResponse } from '../../shared';
 import apiRouter from './api/api.controller';
 
 const rootRouter: Router = express.Router();

@@ -7,7 +7,8 @@ export enum APP_VIEW {
     SPLASH,
     HOME,
     ADMIN,
-    LOGIN
+    LOGIN,
+    REGISTER
 }
 
 export const viewNameResolve = (app: APP_VIEW): string => {
@@ -20,6 +21,8 @@ export const viewNameResolve = (app: APP_VIEW): string => {
             return "URUCHAMIANIE";
         case APP_VIEW.LOGIN:
             return "LOGOWANIE";
+        case APP_VIEW.REGISTER:
+            return "REJESTRACJA";
         default:
                 return "";
     }

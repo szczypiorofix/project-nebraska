@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useAPIRequest = <T,>( url: string, defaultValue: T): [ ( requestOptions: RequestInit ) => void, T, boolean, boolean, string ] => {
     const [ response, setResponse ] = useState<T>( defaultValue );

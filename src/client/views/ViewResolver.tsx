@@ -12,20 +12,23 @@ import { Footer } from '../main-parts/footer-component/Footer';
 import Navbar from '../shared/components/navbar/Navbar';
 import UnorderedList from '../shared/components/unorderedlist/UnorderedList';
 import Login from './login/Login';
+import Register from './register/Register';
 
 const ViewResolver: React.FC = () => {
     const { app, setView } = React.useContext(AppContext) as AppContextType;
 
     const resolveView = () => {
         switch(app.view) {
-        case APP_VIEW.HOME:
-            return <Home></Home>
-        case APP_VIEW.ADMIN:
-            return <Admin></Admin>
-        case APP_VIEW.LOGIN:
-            return <Login></Login>
-        default:
-            return <SplashScreen></SplashScreen>
+            case APP_VIEW.HOME:
+                return <Home></Home>
+            case APP_VIEW.ADMIN:
+                return <Admin></Admin>
+            case APP_VIEW.LOGIN:
+                return <Login></Login>
+            case APP_VIEW.REGISTER:
+                return <Register></Register>
+            default:
+                return <SplashScreen></SplashScreen>
         }
     }
 
@@ -62,6 +65,10 @@ const ViewResolver: React.FC = () => {
                 <Button
                     title={ "LOGIN" }
                     onClick={ () => setCurrentView(APP_VIEW.LOGIN) }
+                />
+                <Button
+                    title={ "REGISTER" }
+                    onClick={ () => setCurrentView(APP_VIEW.REGISTER) }
                 />
             </Container>
             <Container>

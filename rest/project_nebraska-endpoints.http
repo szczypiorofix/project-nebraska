@@ -1,30 +1,36 @@
 ###
-POST http://localhost:8080/api/login/token HTTP/1.1
+POST http://localhost:{{PORT}}/api/login/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
 username=zdzichu
 ###
 
-GET http://localhost:8080/api/login HTTP/1.1
+GET http://localhost:{{PORT}}/api/login HTTP/1.1
 ###
 
-POST http://localhost:8080/api/login/token HTTP/1.1
+POST http://localhost:{{PORT}}/api/login/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
 username=zdzichu
 ###
 
-GET http://localhost:8080/ HTTP/1.1
+GET http://localhost:{{PORT}}/ HTTP/1.1
 ###
 
-GET http://localhost:8080/api/ HTTP/1.1
+GET http://localhost:{{PORT}}/api/ HTTP/1.1
 ###
 
-GET http://localhost:8080/api/status HTTP/1.1
+GET http://localhost:{{PORT}}/api/status HTTP/1.1
 ###
 
-GET http://localhost:8080/api/status/server HTTP/1.1
+GET http://localhost:{{PORT}}/api/status/server HTTP/1.1
 ###
 
-GET http://localhost:8080/api/status/mongodb HTTP/1.1
+GET http://localhost:{{PORT}}/api/status/mongodb HTTP/1.1
+###
+
+GET http://localhost:{{PORT}}/api/user HTTP/1.1
+###
+
+GET http://localhost:{{PORT}}/api/user/1 HTTP/1.1
 ###

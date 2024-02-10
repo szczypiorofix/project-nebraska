@@ -4,7 +4,8 @@ import { NetworkIndicator } from './parts/NetworkIndicator';
 import HttpResolver from '../../resolvers/HttpResolver';
 import HttpService from '../../services/HttpService';
 import { CONNECTION_STATUS, ServerResponse } from '../../../shared';
-import { Row, Button, Container } from '../../shared/components';
+import { Button, Container, Row } from '../../shared/components';
+import ListOfUsers from './parts/ListOfUsers';
 
 const Admin = (): React.JSX.Element => {
     const [connectionStatus, setConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
@@ -18,9 +19,6 @@ const Admin = (): React.JSX.Element => {
                 title={ "Server" }
                 onClick={ () => {
                     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
-
-                    // HttpService - for request
-                    // -> HttpResolver - for handling response
 
                     const resolver = new HttpResolver();
                     resolver.resolve();
@@ -59,6 +57,9 @@ const Admin = (): React.JSX.Element => {
             ></Button>
             <p>{ dbConnectionStatus }</p>
             <NetworkIndicator status={ dbConnectionStatus }/>
+        </Container>
+        <Container>
+            <ListOfUsers />
         </Container>
     </Row>
 }

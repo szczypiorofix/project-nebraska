@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AppContext } from '../../context/AppContext';
 import { APP_VIEW, AppContextType } from '../../types';
-import { Container, Button } from '../../shared/components';
+import { Button, Container } from '../../shared/components';
 
 const Home: React.FC = () => {
     const { setView } = React.useContext(AppContext) as AppContextType;

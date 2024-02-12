@@ -41,10 +41,7 @@ registerRouter.post("/", async (request: Request, response: Response): Promise<v
             resp.code = 200;
             resp.error = false;
             resp.message = "User registered";
-            const defaultUser: IUser = {
-                ...IUserDefaults
-            };
-            resp.data = MongooseDocumentMapper<MongooseDocument<IUser>, IUser>(doc, defaultUser);
+            resp.data = MongooseDocumentMapper<IUser>(doc, IUserDefaults);
             response.status(resp.code).json(resp);
         })
         .catch((err) => {

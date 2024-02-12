@@ -4,7 +4,7 @@ export interface IUser {
     password: string;
 }
 
-export const IUserDefaults: Pick<IUser, 'email' | 'password'> = {
+export const IUserDefaults: IUser = {
     email: '',
     password: '',
 };

@@ -1,4 +1,4 @@
-import { User } from './user.model';
+import { IUser } from './user.model';
 
 export interface ServerResponse {
     error: boolean;
@@ -7,7 +7,7 @@ export interface ServerResponse {
 }
 
 export interface ServerUsersResponse extends ServerResponse {
-    data?: User[];
+    data?: IUser[];
 }
 
 export interface MongoDBData {

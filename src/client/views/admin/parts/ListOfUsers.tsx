@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import {  ServerUsersResponse, User } from '../../../../shared';
+import {  ServerUsersResponse, IUser } from '../../../../shared';
 import HttpService from '../../../services/HttpService';
 
 const ListOfUsers = (): React.JSX.Element => {
 
-    const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<IUser[]>([]);
     const [listOfUsersReceived, setListOfUsersReceived] = useState<boolean>(false);
 
-    const listItem = (item: User, index: number) => <li key={index}>
+    const listItem = (item: IUser, index: number) => <li key={index}>
         {item.email}
     </li>
 

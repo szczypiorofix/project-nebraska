@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { validateEmail, User } from '../../shared';
+import { validateEmail, IUser } from '../../shared';
 
 const userSchema = new Schema({
     email: {
@@ -17,4 +17,4 @@ const userSchema = new Schema({
     },
 });
 
-export const UserModel = model<Schema<User>>('User', userSchema);
+export const UserModel = model<Schema<IUser>>('User', userSchema);

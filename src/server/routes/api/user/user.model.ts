@@ -1,7 +1,7 @@
-import { Types } from 'mongoose';
-import { ServerResponse, User } from '../../../../shared';
+import { Types, Document } from 'mongoose';
+import { ServerResponse, IUser } from '../../../../shared';
 
-export type UserResults = (Document & User & {_id: Types.ObjectId})[];
+export type UserResults = (Document<IUser> & IUser & {_id: Types.ObjectId})[];
 
 export interface UserRouterGetResponse extends ServerResponse {
     data?: UserResults;

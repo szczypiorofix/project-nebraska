@@ -1,5 +1,5 @@
-import { ServerResponse, User } from '../../../../shared';
+import { ServerResponse, IUser } from '../../../../shared';
 
 export interface RegisterRouterGetResponse extends ServerResponse {
-    data?: User;
+    data?: IUser;
 }

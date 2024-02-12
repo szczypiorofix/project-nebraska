@@ -1,6 +1,5 @@
 import express, { Request, Response, Router } from 'express';
-import { MongoDBResponse, ServerResponse } from '../../../shared/response.model';
-import MongoHelper from '../../helpers/mongodb/mongo.helper';
+import { MongoDBResponse, ServerResponse } from '../../../shared';
 import mongoose from 'mongoose';
 import MongoClient from '../../core/MongoClient';
 

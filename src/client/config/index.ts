@@ -1,19 +1,19 @@
 
-export enum TargetCofiguration {
+export enum TargetConfiguration {
     DEVELOPMENT,
     PRODUCTION,
     TEST
 }
 
 export interface AppConfig {
-    target: TargetCofiguration;
+    target: TargetConfiguration;
     api: {
         baseUrl: string;
     };
 }
 
 const LocalhostConfig: AppConfig = {
-    target: TargetCofiguration.DEVELOPMENT,
+    target: TargetConfiguration.DEVELOPMENT,
     api: {
         baseUrl: "http://localhost:3000/api",
     },
@@ -21,12 +21,12 @@ const LocalhostConfig: AppConfig = {
 
 
 const DomainConfig: AppConfig = {
-    target: TargetCofiguration.PRODUCTION,
+    target: TargetConfiguration.PRODUCTION,
     api: {
         baseUrl: "https://api.domain.com/api",
     },
 };
 
-export const AppMode: TargetCofiguration = TargetCofiguration.DEVELOPMENT;
+export const AppMode: TargetConfiguration = TargetConfiguration.DEVELOPMENT;
 
 export const CurrentAppConfig: AppConfig = LocalhostConfig;

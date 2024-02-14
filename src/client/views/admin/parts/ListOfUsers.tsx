@@ -23,8 +23,8 @@ const ListOfUsers = (): React.JSX.Element => {
             }
         }
         if (!listOfUsersReceived) {
-            fetchResults().
-                then(() => {
+            fetchResults()
+                .then(() => {
 
                 })
                 .catch(err => {

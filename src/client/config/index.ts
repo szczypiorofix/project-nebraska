@@ -37,6 +37,15 @@ const DomainConfig: AppConfig = {
     },
 };
 
+function resolveConfig(): AppConfig {
+    switch (AppMode) {
+        case TargetConfiguration.PRODUCTION:
+            return DomainConfig;
+        default:
+            return LocalhostConfig;
+    }
+}
+
 export const AppMode: TargetConfiguration = TargetConfiguration.DEVELOPMENT;
 
-export const CurrentAppConfig: AppConfig = LocalhostConfig;
+export const CurrentAppConfig: AppConfig = resolveConfig();

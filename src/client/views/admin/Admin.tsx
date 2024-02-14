@@ -60,4 +60,4 @@ const Admin = (): React.JSX.Element => {
     </Row>
 }
 
-export default Admin;;
+export default Admin;

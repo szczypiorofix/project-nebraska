@@ -1,16 +1,19 @@
 import express, { Request, Response, Router } from 'express';
-import { UserModel } from '../../../models';
+import { MongooseDocument, UserModel } from '../../../models';
 import { UserResults, UserRouterGetResponse } from './user.model';
+import { IUser, IUserDefaults } from '../../../../shared';
+import MongooseDocumentMapper from '../../../helpers/mongodb/mongo.helper';
 
 const userRouter: Router = express.Router();
 
 userRouter.get("/", async (request: Request, response: Response<UserRouterGetResponse>) => {
-    const users: UserResults = await UserModel.find();
+    const users: MongooseDocument<IUser>[] = await UserModel.find();
+    const usersFiltered: IUser[] = MongooseDocumentMapper<IUser>(users, IUserDefaults);
     const resp: UserRouterGetResponse = {
         code: 200,
         error: false,
         message: "OK",
-        data: users
+        data: usersFiltered
     }
     response.status(resp.code).json(resp);
 });

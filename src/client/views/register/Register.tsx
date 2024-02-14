@@ -38,28 +38,20 @@ const Register: React.FC = () => {
             password: password,
             password2: password2
         };
-        try {
-            HttpService.post<UserRegisterCredentials>(
-                registerRoute,
-                userCredentials
-            )
-                .then((response) => {
-                    console.log(response);
-                    if (response.error) {
-                        setErrorMsg(response.message);
-                    }
-                })
-                .catch(err => {
-                    setErrorMsg(err);
-                });
-        } catch(err) {
-            console.error(err);
-            setErrorMsg(err.toString());
-        } finally {
-            setEmail("");
-            setPassword("");
-            setPassword2("");
-        }
+
+        HttpService.post<UserRegisterCredentials>(registerRoute, userCredentials)
+            .then((response) => {
+                console.log(response);
+                if (response.error) {
+                    setErrorMsg(response.message);
+                }
+            })
+            .catch(err => {
+                setEmail("");
+                setPassword("");
+                setPassword2("");
+                setErrorMsg(err);
+            });
     },[email, password, password2]);
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {

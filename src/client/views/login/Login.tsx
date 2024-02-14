@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Container, Row } from '../../shared/components';
 import {
@@ -8,9 +8,8 @@ import {
     LabelComponent,
     SubmitButtonComponent
 } from './Login.style';
-import { ServerResponse } from '../../../shared';
 import HttpService from '../../services/HttpService';
-import { validateEmail } from '../../../shared/validators';
+import { validateEmail } from '../../../shared';
 
 interface UserLoginCredentials {
     email: string;
@@ -20,7 +19,7 @@ interface UserLoginCredentials {
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [sendRequest, setSendRequest] = useState(false);
+    const [errorMsg, setErrorMsg] = useState<string>("");
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -30,53 +29,30 @@ const Login: React.FC = () => {
         setPassword(event.target.value);
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
         if (!validateEmail(email)) {
-            console.error("Ivalid email");
+            console.error("Invalid email");
             return;
         }
-
-        setSendRequest(true);
-    };
-
-    useEffect(() => {
-        const fetchResults = async (): Promise<void> => {
-            if (!sendRequest) {
-                return;
-            }
-
-            setSendRequest(false);
-
-            const userCredentials: UserLoginCredentials = {
-                email: email,
-                password: password
-            };
-
-            try {
-                const response: ServerResponse = await HttpService.post<UserLoginCredentials>("http://localhost:8080/api/login/", userCredentials);
+        const userCredentials: UserLoginCredentials = {
+            email: email,
+            password: password
+        };
+        HttpService
+            .post<UserLoginCredentials>("http://localhost:8080/api/login/", userCredentials)
+            .then((response) => {
                 console.log(response);
-                // todo: handle response
-            } catch(err) {
-                console.error(err);
-            } finally {
-                setPassword("");
+                if (response.error) {
+                    setErrorMsg(response.message);
+                }
+            })
+            .catch(err => {
                 setEmail("");
-                setSendRequest(false);
-            }
-        }
-
-        if (sendRequest) {
-            fetchResults()
-                .then(() => {
-                    console.log("Fetch results - finished.");
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-        }
-    }, [sendRequest]);
+                setPassword("");
+                setErrorMsg(err);
+            });
+    },[email, password]);
 
     return (
         <Container>
@@ -93,6 +69,9 @@ const Login: React.FC = () => {
                         <LabelComponent>Password:</LabelComponent>
                         <InputComponents type="password" value={password} onChange={handlePasswordChange} />
                     </InputGroupComponent>
+                    { errorMsg.length > 0 && (
+                        <p>{errorMsg}</p>
+                    )}
                     <SubmitButtonComponent type="submit">Login</SubmitButtonComponent>
                 </FormComponent>
             </Row>

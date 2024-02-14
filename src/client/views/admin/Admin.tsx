@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { NetworkIndicator } from './parts/NetworkIndicator';
-import HttpResolver from '../../resolvers/HttpResolver';
 import HttpService from '../../services/HttpService';
 import { CONNECTION_STATUS, ServerResponse } from '../../../shared';
 import { Button, Container, Row } from '../../shared/components';
@@ -19,9 +18,6 @@ const Admin = (): React.JSX.Element => {
                 title={ "Server" }
                 onClick={ () => {
                     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
-
-                    const resolver = new HttpResolver();
-                    resolver.resolve();
 
                     (async () => {
                         try {

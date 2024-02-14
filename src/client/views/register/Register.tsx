@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Container, Row } from '../../shared/components';
 import {
     FormComponent,
@@ -7,9 +7,9 @@ import {
     LabelComponent,
     SubmitButtonComponent
 } from '../login/Login.style';
-import { validateEmail } from '../../../shared/validators';
-import { ServerResponse } from '../../../shared';
+import { validateEmail } from '../../../shared';
 import HttpService from '../../services/HttpService';
+import { registerRoute } from '../../router';
 
 interface UserRegisterCredentials {
     email: string;
@@ -21,80 +21,61 @@ const Register: React.FC = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [password2, setPassword2] = useState<string>("");
-    const [sendRequest, setSendRequest] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string>("");
 
-    const register = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-    }
+    const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (password !== password2) {
+            setErrorMsg("Hasła nie są takie same!");
+            return;
+        }
+        if (!validateEmail(password)) {
+            setErrorMsg("Email ma niepoprawny format");
+            return;
+        }
+        const userCredentials: UserRegisterCredentials = {
+            email: email,
+            password: password,
+            password2: password2
+        };
+        try {
+            HttpService.post<UserRegisterCredentials>(
+                registerRoute,
+                userCredentials
+            )
+                .then((response) => {
+                    console.log(response);
+                    if (response.error) {
+                        setErrorMsg(response.message);
+                    }
+                })
+                .catch(err => {
+                    setErrorMsg(err);
+                });
+        } catch(err) {
+            console.error(err);
+            setErrorMsg(err.toString());
+        } finally {
+            setEmail("");
+            setPassword("");
+            setPassword2("");
+        }
+    },[email, password, password2]);
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setErrorMsg("");
         setEmail(event.target.value);
     };
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setErrorMsg("");
         setPassword(event.target.value);
     };
 
     const handlePassword2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setErrorMsg("");
         setPassword2(event.target.value);
     };
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (password !== password2) {
-            console.error("Passwords does not match!");
-            return;
-        }
-        if (!validateEmail(email)) {
-            console.error("Invalid email");
-            return;
-        }
-        setSendRequest(true);
-    };
-
-    useEffect(() => {
-        const fetchResults = async (): Promise<void> => {
-            setSendRequest(false);
-            const userCredentials: UserRegisterCredentials = {
-                email: email,
-                password: password,
-                password2: password2
-            };
-            try {
-                HttpService.post<UserRegisterCredentials>(
-                    "http://localhost:8080/api/register/",
-                    userCredentials
-                )
-                    .then((response) => {
-                        console.log(response);
-                        if (response.error) {
-                            setErrorMsg(response.message);
-                        }
-                    })
-                    .catch(err => {
-                        setErrorMsg(err);
-                    });
-            } catch(err) {
-                console.error(err);
-            } finally {
-                setEmail("");
-                setPassword("");
-                setPassword2("");
-                setSendRequest(false);
-            }
-        }
-        if (sendRequest) {
-            fetchResults()
-                .then(() => {
-                    // console.log("User registered.");
-                 })
-                .catch(err => {
-                    console.error(err);
-                });
-        }
-    }, [sendRequest]);
 
     return (
         <Container>

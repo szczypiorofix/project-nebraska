@@ -9,8 +9,8 @@ jobs:
       - checkout
       - run: npm install
       - run: git log --oneline --decorate > public/changelog.txt
-      - run: npm run build
       - run: npm test
+      - run: npm run build
 workflows:
   version: 2
   deploy:

@@ -2,7 +2,6 @@ import sqlite3, { Database, RunResult } from 'sqlite3';
 import Sqlite3 from './sqlite3.generator';
 
 class Sqlite3Helper {
-
     private db: sqlite3.Database;
 
     public init(): void {
@@ -61,4 +60,3 @@ class Sqlite3Helper {
 }
 
 export default Sqlite3Helper;
-

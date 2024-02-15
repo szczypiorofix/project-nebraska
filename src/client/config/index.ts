@@ -2,7 +2,6 @@
 export enum TargetConfiguration {
     DEVELOPMENT,
     PRODUCTION,
-    TEST
 }
 
 export interface AppAPIConfig {
@@ -37,8 +36,8 @@ const DomainConfig: AppConfig = {
     },
 };
 
-function resolveConfig(): AppConfig {
-    switch (AppMode) {
+function resolveConfig(appMode: TargetConfiguration): AppConfig {
+    switch (appMode) {
         case TargetConfiguration.PRODUCTION:
             return DomainConfig;
         default:
@@ -46,6 +45,4 @@ function resolveConfig(): AppConfig {
     }
 }
 
-export const AppMode: TargetConfiguration = TargetConfiguration.DEVELOPMENT;
-
-export const CurrentAppConfig: AppConfig = resolveConfig();
+export const CurrentAppConfig: AppConfig = resolveConfig(TargetConfiguration.DEVELOPMENT);

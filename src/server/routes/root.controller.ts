@@ -1,18 +1,13 @@
-import express, { Request, Response, Router } from 'express';
-import { ServerResponse } from '../../shared';
-import apiRouter from './api/api.controller';
+import express, { Router } from 'express';
+import usersRouter from './users/users.controller';
+import statusRouter from './status/status.controller';
 
 const rootRouter: Router = express.Router();
+const apiRouter: Router = express.Router();
 
-rootRouter.get("/", (req: Request, res: Response): void => {
-    const resp: ServerResponse = {
-        code: 200,
-        message: "OK",
-        error: false
-    }
-    res.status(200).json(resp);
-});
+apiRouter.use("/users", usersRouter);
+apiRouter.use("/status", statusRouter);
 
-rootRouter.use('/api', apiRouter);
+rootRouter.use('/api/v1', apiRouter);
 
 export default rootRouter;

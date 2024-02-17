@@ -13,7 +13,7 @@ class TokenHelper {
             throw new Error("No environmental variable: TOKEN_SECRET !");
         }
         if (!username) {
-            throw new Error("No user name!");
+            throw new Error("No users name!");
         }
         if (username.length < 3) {
             throw new Error("User name too short (min. 3 chars)!");

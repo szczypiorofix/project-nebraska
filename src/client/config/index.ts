@@ -5,10 +5,12 @@ export enum TargetConfiguration {
 }
 
 export interface AppAPIConfig {
-    baseUrl: string;
+    fullPath: string;
     port?: number;
     scheme: string;
     path: string;
+    version: string;
+    domain: string;
 }
 
 export interface AppConfig {
@@ -19,10 +21,12 @@ export interface AppConfig {
 const LocalhostConfig: AppConfig = {
     target: TargetConfiguration.DEVELOPMENT,
     api: {
-        baseUrl: "http://localhost:3000/api",
+        fullPath: "",
         port: 3000,
         scheme: "http",
-        path: "/api"
+        domain: "localhost",
+        path: "/api",
+        version: "/v1",
     },
 };
 
@@ -30,18 +34,25 @@ const LocalhostConfig: AppConfig = {
 const DomainConfig: AppConfig = {
     target: TargetConfiguration.PRODUCTION,
     api: {
-        baseUrl: "https://api.domain.com/api",
+        fullPath: "",
         scheme: "https",
-        path: "/api"
+        domain: "api.domain.com",
+        path: "/api",
+        version: "/v1",
     },
 };
+
+function resolveFullUrlPath(config: AppConfig): AppConfig {
+    config.api.fullPath = `${config.api.scheme}://${config.api.domain}${config.api.port ? `:${config.api.port}` : ""}${config.api.path}${config.api.version}`;
+    return config;
+}
 
 function resolveConfig(appMode: TargetConfiguration): AppConfig {
     switch (appMode) {
         case TargetConfiguration.PRODUCTION:
-            return DomainConfig;
+            return resolveFullUrlPath(DomainConfig);
         default:
-            return LocalhostConfig;
+            return resolveFullUrlPath(LocalhostConfig);
     }
 }
 

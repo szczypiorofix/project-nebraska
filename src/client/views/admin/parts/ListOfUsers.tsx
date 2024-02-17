@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {  ServerUsersResponse, IUser } from '../../../../shared';
 import HttpService from '../../../services/HttpService';
+import { usersRoute } from '../../../router';
 
 const ListOfUsers = (): React.JSX.Element => {
 
@@ -15,7 +16,7 @@ const ListOfUsers = (): React.JSX.Element => {
         const fetchResults = async () => {
             setListOfUsersReceived(true);
             try {
-                const response: ServerUsersResponse = await HttpService.get("http://localhost:8080/api/user/");
+                const response: ServerUsersResponse = await HttpService.get(usersRoute);
                 console.log(response);
                 setUsers(response.data);
             } catch(err) {

@@ -7,10 +7,6 @@ export enum TargetPath {
     REGISTER
 }
 
-export const registerRoute: string = CurrentAppConfig.api.baseUrl + "/register"; // http://localhost:8080/api/register/
+export const registerRoute: string = CurrentAppConfig.api.fullPath + "/register";
 
-export const loginRoute: string = CurrentAppConfig.api.baseUrl + "login"; // http://localhost:8080/api/login/
-
-export const mongoStatusRoute: string = CurrentAppConfig.api.baseUrl  + "/status/mongodb"; // http://localhost:8080/api/status/mongodb/
-
-export const serverStatusRoute: string =  CurrentAppConfig.api.baseUrl + "/status/server"; // http://localhost:8080/api/status/server/
+export const usersRoute: string = CurrentAppConfig.api.fullPath + "/users";

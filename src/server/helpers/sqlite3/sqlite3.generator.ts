@@ -28,8 +28,6 @@ namespace Sqlite3 {
 
     export class Sqlite3Generator {
 
-        public constructor() {}
-
         public buildQuery<T>(obj: T): string {
             // 'CREATE TABLE IF NOT EXISTS `users` (`user_id` INTEGER PRIMARY KEY AUTOINCREMENT, `email` VARCHAR(255) NOT NULL, `secret` varchar(255) NOT NULL)',
             let query = "";

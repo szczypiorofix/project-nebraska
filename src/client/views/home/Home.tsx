@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AppContext } from '../../context/AppContext';
+import AppContext from '../../context/AppContext';
 import { APP_VIEW, AppContextType } from '../../types';
 import { Button, Container } from '../../shared/components';
 
@@ -13,4 +13,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;;
+export default Home;

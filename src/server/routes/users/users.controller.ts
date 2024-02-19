@@ -98,6 +98,4 @@ usersRouter.post("/register", async (request: Request, response: Response): Prom
         });
 });
 
-
-
 export default usersRouter;

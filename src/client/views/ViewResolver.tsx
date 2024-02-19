@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppContext } from '../context/AppContext';
+import AppContext from '../context/AppContext';
 import { APP_VIEW, AppContextType, viewNameResolve } from '../types';
 import Container from '../shared/components/container/Container';
 import Button from '../shared/components/buttonn/Button';

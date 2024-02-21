@@ -8,12 +8,3 @@ export function loggerMiddleware(
     console.log(`Request (${request.method}) ${request.path}`);
     next();
 }
-
-export function headerMiddleware(
-    request: Request,
-    response: Response,
-    next: NextFunction
-) {
-    response.header('Content-Type', 'application/json');
-    next();
-}

@@ -10,6 +10,7 @@ import {
 } from './Login.style';
 import HttpService from '../../services/HttpService';
 import { validateEmail } from '../../../shared';
+import { loginRoute } from '../../router';
 
 interface UserLoginCredentials {
     email: string;
@@ -40,7 +41,7 @@ const Login: React.FC = () => {
             password: password
         };
         HttpService
-            .post<UserLoginCredentials>("http://localhost:8080/api/login/", userCredentials)
+            .post<UserLoginCredentials>(loginRoute, userCredentials)
             .then((response) => {
                 console.log(response);
                 if (response.error) {

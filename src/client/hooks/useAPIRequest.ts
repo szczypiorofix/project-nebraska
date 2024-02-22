@@ -1,5 +1,7 @@
 import { useCallback, useState } from 'react';
 
+// NO USAGE RIGHT NOW
+
 export const useAPIRequest = <T,>( url: string, defaultValue: T): [ ( requestOptions: RequestInit ) => void, T, boolean, boolean, string ] => {
     const [ response, setResponse ] = useState<T>( defaultValue );
     const [ loading, setLoading ] = useState( false );

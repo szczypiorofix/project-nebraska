@@ -1,20 +1,32 @@
-import { model, Schema } from 'mongoose';
-import { validateEmail, IUser } from '../../shared';
+import { DefaultSchemaOptions, Document, FlatRecord, Model, model, Schema, Types } from 'mongoose';
+import { IUser, validateEmail } from '../../shared';
 
-const userSchema = new Schema({
+const userSchema: Schema<
+    any,
+    Model<any, any, any, any, any, any>,
+    {}, {}, {}, {},
+    DefaultSchemaOptions,
+    IUser,
+    Document<unknown, {}, FlatRecord<IUser>> & FlatRecord<IUser>
+> = new Schema({
     email: {
         type: String,
         validate: {
             validator: validateEmail,
-            message: (props: { value: string }) => `${props.value} to nie jest poprawny adres email.`,
+            message: (props: { value: string }): string => `${props.value} to nie jest poprawny adres email.`,
         },
-        required: [true, "Adres email jest wymagany."],
-        unique: [true, "Ten adres email już istnieje."],
+        required: [true, " Email jest wymagany."],
+        unique: [true, "Ten email już istnieje."],
     },
     password: {
         type: String,
-        required: true
+        required: [true, "Hasło jest wymagane."],
     },
 });
 
-export const UserModel = model<Schema<IUser>>('User', userSchema);
+export const UserModel: Model<
+    IUser,
+    {}, {}, {},
+    Document<unknown, {}, IUser> & IUser & {_id: Types.ObjectId},
+    any
+> = model<IUser>('User', userSchema);

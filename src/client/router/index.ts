@@ -1,12 +1,11 @@
 import { CurrentAppConfig } from '../config';
 
-export enum TargetPath {
-    MONGO_STATUS,
-    SERVER_STATUS,
-    LOGIN,
-    REGISTER
-}
+export const registerRoute: string = CurrentAppConfig.api.baseUrl + "/users/register";
 
-export const registerRoute: string = CurrentAppConfig.api.fullPath + "/register";
+export const loginRoute: string = CurrentAppConfig.api.baseUrl + "/users/login";
 
-export const usersRoute: string = CurrentAppConfig.api.fullPath + "/users";
+export const usersRoute: string = CurrentAppConfig.api.baseUrl + "/users";
+
+export const serverStatusRoute: string = CurrentAppConfig.api.baseUrl + "/status/server";
+
+export const mongodbStatusRoute: string = CurrentAppConfig.api.baseUrl + "/status/mongodb";

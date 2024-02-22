@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 import { NetworkIndicator } from './parts/NetworkIndicator';
 import HttpService from '../../services/HttpService';
-import { CONNECTION_STATUS, ServerResponse } from '../../../shared';
+import { CONNECTION_STATUS } from '../../../shared';
 import { Button, Container, Row } from '../../shared/components';
 import ListOfUsers from './parts/ListOfUsers';
+import { mongodbStatusRoute, serverStatusRoute } from '../../router';
 
 const Admin = (): React.JSX.Element => {
     const [connectionStatus, setConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
@@ -19,16 +20,18 @@ const Admin = (): React.JSX.Element => {
                 onClick={ () => {
                     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
 
-                    (async () => {
-                        try {
-                            const response: ServerResponse = await HttpService.get("http://localhost:8080/api/status/server");
-                            console.log(response);
+                    HttpService.get(serverStatusRoute)
+                        .then((response) => {
+                            if (response.error) {
+                                setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
+                                return;
+                            }
                             setConnectionStatus(CONNECTION_STATUS.CONNECTED);
-                        } catch(err) {
+                        })
+                        .catch(err => {
                             console.error(err);
                             setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
-                        }
-                    })();
+                        });
                 } }
             ></Button>
             <p>{ connectionStatus }</p>
@@ -39,16 +42,16 @@ const Admin = (): React.JSX.Element => {
                 title={ "MongoDB" }
                 onClick={ () => {
                     setDBConnectionStatus(CONNECTION_STATUS.CONNECTING);
-                    (async () => {
-                        try {
-                            const response: ServerResponse = await HttpService.get("http://localhost:8080/api/status/mongodb");
-                            console.log(response);
-                            setDBConnectionStatus(CONNECTION_STATUS.CONNECTED);
-                        } catch(err) {
-                            console.error(err);
+                    HttpService.get(mongodbStatusRoute).then((response) => {
+                        if (response.error) {
                             setDBConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
+                            return;
                         }
-                    })();
+                        setDBConnectionStatus(CONNECTION_STATUS.CONNECTED);
+                    }).catch(err => {
+                        console.error(err);
+                        setDBConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
+                    });
                 }}
             ></Button>
             <p>{ dbConnectionStatus }</p>

@@ -11,6 +11,7 @@ import {
 import HttpService from '../../services/HttpService';
 import { validateEmail } from '../../../shared';
 import { loginRoute } from '../../router';
+import { RegisterUserServerResponse } from '../../../server/routes/users/models/register.model';
 
 interface UserLoginCredentials {
     email: string;
@@ -41,7 +42,7 @@ const Login: React.FC = () => {
             password: password
         };
         HttpService
-            .post<UserLoginCredentials>(loginRoute, userCredentials)
+            .post<UserLoginCredentials, RegisterUserServerResponse>(loginRoute, userCredentials)
             .then((response) => {
                 console.log(response);
                 if (response.error) {

@@ -1,5 +1,5 @@
 import { ServerResponse, IUser } from '../../../../shared';
 
-export interface RegisterRouterGetResponse extends ServerResponse {
+export interface RegisterUserServerResponse extends ServerResponse {
     data?: IUser;
 }

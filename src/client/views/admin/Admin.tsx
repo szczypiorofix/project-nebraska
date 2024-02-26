@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 import { NetworkIndicator } from './parts/NetworkIndicator';
 import HttpService from '../../services/HttpService';
-import { CONNECTION_STATUS } from '../../../shared';
+import { CONNECTION_STATUS, ServerResponse } from '../../../shared';
 import { Button, Container, Row } from '../../shared/components';
 import ListOfUsers from './parts/ListOfUsers';
 import { mongodbStatusRoute, serverStatusRoute } from '../../router';
+import { UserRouterGetResponse } from '../../../server/routes/users/models/users.model';
 
 const Admin = (): React.JSX.Element => {
     const [connectionStatus, setConnectionStatus] = useState<CONNECTION_STATUS>(CONNECTION_STATUS.DISCONNECTED);
@@ -20,7 +21,7 @@ const Admin = (): React.JSX.Element => {
                 onClick={ () => {
                     setConnectionStatus(CONNECTION_STATUS.CONNECTING);
 
-                    HttpService.get(serverStatusRoute)
+                    HttpService.get<UserRouterGetResponse>(serverStatusRoute)
                         .then((response) => {
                             if (response.error) {
                                 setConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
@@ -42,16 +43,18 @@ const Admin = (): React.JSX.Element => {
                 title={ "MongoDB" }
                 onClick={ () => {
                     setDBConnectionStatus(CONNECTION_STATUS.CONNECTING);
-                    HttpService.get(mongodbStatusRoute).then((response) => {
-                        if (response.error) {
+                    HttpService.get<ServerResponse>(mongodbStatusRoute)
+                        .then((response) => {
+                            if (response.error) {
+                                setDBConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
+                                return;
+                            }
+                            setDBConnectionStatus(CONNECTION_STATUS.CONNECTED);
+                        })
+                        .catch(err => {
+                            console.error(err);
                             setDBConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
-                            return;
-                        }
-                        setDBConnectionStatus(CONNECTION_STATUS.CONNECTED);
-                    }).catch(err => {
-                        console.error(err);
-                        setDBConnectionStatus(CONNECTION_STATUS.DISCONNECTED);
-                    });
+                        });
                 }}
             ></Button>
             <p>{ dbConnectionStatus }</p>

@@ -3,11 +3,13 @@ import { MongooseDocument, UserModel } from '../../models';
 import { UserResults, UserRouterGetResponse } from './models/users.model';
 import { IUser, IUserDefaults } from '../../../shared';
 import MongooseDocumentMapper from '../../helpers/mongodb/mongo.helper';
-import { RegisterRouterGetResponse } from './models/register.model';
+import { RegisterUserServerResponse } from './models/register.model';
+import { asyncErrorHandlerMiddleware } from '../../middleware';
+import AppError from '../../core/AppError';
 
 const usersRouter: Router = express.Router();
 
-usersRouter.get("/", async (request: Request, response: Response<UserRouterGetResponse>) => {
+usersRouter.get("/", asyncErrorHandlerMiddleware( async (request: Request, response: Response<UserRouterGetResponse>) => {
     const users: MongooseDocument<IUser>[] = await UserModel.find();
     const usersFiltered: IUser[] = MongooseDocumentMapper<IUser>(users, IUserDefaults);
     const resp: UserRouterGetResponse = {
@@ -17,9 +19,9 @@ usersRouter.get("/", async (request: Request, response: Response<UserRouterGetRe
         data: usersFiltered
     }
     response.status(resp.code).json(resp);
-});
+}));
 
-usersRouter.get("/:id", async (request: Request, response: Response<UserRouterGetResponse>) => {
+usersRouter.get("/:id", asyncErrorHandlerMiddleware( async (request: Request, response: Response<UserRouterGetResponse>) => {
     const id: string = request.params.id;
     const users: UserResults = await UserModel.find({id: id});
     const resp: UserRouterGetResponse = {
@@ -28,17 +30,18 @@ usersRouter.get("/:id", async (request: Request, response: Response<UserRouterGe
         message: `User with id ${id} found`,
         data: users
     };
+
     response.status(resp.code).json(resp);
-});
+}));
 
 // =============== LOGIN ===============
 
-usersRouter.post("/login", async (request: Request, response: Response<UserRouterGetResponse>) => {
+usersRouter.post("/login", asyncErrorHandlerMiddleware(async (request: Request, response: Response<UserRouterGetResponse>) => {
     const { email, password } = request.body;
     const resp: UserRouterGetResponse = {
         code: 404,
         error: false,
-        message: `Users not found`
+        message: `User not found`
     };
     const userExists: (MongooseDocument<IUser>)[] = await UserModel.find({
         email: email,
@@ -50,13 +53,13 @@ usersRouter.post("/login", async (request: Request, response: Response<UserRoute
         resp.data = MongooseDocumentMapper<IUser>(userExists, IUserDefaults);
     }
     response.status(resp.code).json(resp);
-});
+}));
 
 // =============== REGISTER ===============
 
-usersRouter.post("/register", async (request: Request, response: Response): Promise<void> => {
+usersRouter.post("/register", asyncErrorHandlerMiddleware(async (request: Request, response: Response): Promise<void> => {
     const { email, password, password2 } = request.body;
-    const resp: RegisterRouterGetResponse = {
+    const resp: RegisterUserServerResponse = {
         code: 200,
         error: true,
         message: `User already exists`
@@ -66,7 +69,7 @@ usersRouter.post("/register", async (request: Request, response: Response): Prom
         resp.code = 400;
         resp.message = `Passwords do not match`;
         response.status(resp.code).json(resp);
-        return;
+        throw new AppError("Password do not match!", 500);
     }
 
     const userExists: (MongooseDocument<IUser>)[] = await UserModel.find({
@@ -74,8 +77,7 @@ usersRouter.post("/register", async (request: Request, response: Response): Prom
     });
 
     if (Array.isArray(userExists) && userExists.length > 0) {
-        response.status(resp.code).json(resp);
-        return;
+        throw new AppError("User already exists!", 400);
     }
 
     const newUser: MongooseDocument<IUser> = new UserModel({
@@ -96,6 +98,6 @@ usersRouter.post("/register", async (request: Request, response: Response): Prom
             resp.code = 500;
             response.status(resp.code).json(resp);
         });
-});
+}));
 
 export default usersRouter;

@@ -1,9 +1,8 @@
-import { ServerResponse } from '../../shared';
 
 class HttpService {
 
-    public static async get(url: string): Promise<ServerResponse> {
-        return new Promise<ServerResponse>(async (resolve, reject) => {
+    public static async get<V>(url: string): Promise<V> {
+        return new Promise<V>(async (resolve, reject) => {
             try {
                 const fetchResponse: Response = await fetch(url, {
                     headers: {
@@ -21,8 +20,8 @@ class HttpService {
         });
     }
 
-    public static post<T>(url: string, data: T): Promise<ServerResponse> {
-        return new Promise<ServerResponse>(async (resolve, reject) => {
+    public static post<T, V>(url: string, data: T): Promise<V> {
+        return new Promise<V>(async (resolve, reject) => {
             try {
                 const fetchResponse: Response = await fetch(url, {
                     body: JSON.stringify(data),
@@ -37,9 +36,6 @@ class HttpService {
                     },
                     method: "POST",
                 });
-                if (!fetchResponse.ok) {
-                    reject(fetchResponse.statusText);
-                }
                 resolve(await fetchResponse.json());
             } catch (err) {
                 reject(err);

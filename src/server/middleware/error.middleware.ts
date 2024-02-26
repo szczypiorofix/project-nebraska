@@ -1,20 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import AppError from '../core/AppError';
 
-const errorHandler = (err: any, req: Request, res: Response): void => {
-    let statusCode: number = res.statusCode === 200 ? 500 : res.statusCode;
-    let message: string = err.message;
-
-    res.status(500);
-    res.render('error', { error: err })
-
-    // res.status(statusCode).json({
-    //     message: message,
-    //     stack: process.env.NODE_ENV === 'production' ? null : err.stack,
-    // });
-};
-
-
 const errorLogger = (err: Error, req: Request, res: Response, next: NextFunction): void => {
     console.error(`ERROR LOGGER: ${err.message}`);
     next(err);
@@ -33,16 +19,20 @@ const errorResponder = (err: AppError, req: Request, res: Response, next: NextFu
 
     res.status(statusCode).json(
         {
-            error: message,
+            error: true,
             code: err.statusCode,
+            message: message,
             stack: process.env.NODE_ENV === 'production' ? null : err.stack
         }
     );
 }
 
+const asyncErrorHandlerMiddleware = (fn: Function) => (req: Request, res: Response, next: NextFunction) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+}
 
 export {
-    errorHandler,
+    asyncErrorHandlerMiddleware,
     errorLogger,
     errorResponder
 };

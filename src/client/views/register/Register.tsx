@@ -10,6 +10,7 @@ import {
 import { validateEmail } from '../../../shared';
 import HttpService from '../../services/HttpService';
 import { registerRoute } from '../../router';
+import { RegisterUserServerResponse } from '../../../server/routes/users/models/register.model';
 
 interface UserRegisterCredentials {
     email: string;
@@ -29,7 +30,7 @@ const Register: React.FC = () => {
             setErrorMsg("Hasła nie są takie same!");
             return;
         }
-        if (!validateEmail(password)) {
+        if (!validateEmail(email)) {
             setErrorMsg("Email ma niepoprawny format");
             return;
         }
@@ -39,7 +40,7 @@ const Register: React.FC = () => {
             password2: password2
         };
 
-        HttpService.post<UserRegisterCredentials>(registerRoute, userCredentials)
+        HttpService.post<UserRegisterCredentials, RegisterUserServerResponse>(registerRoute, userCredentials)
             .then((response) => {
                 console.log(response);
                 if (response.error) {
@@ -47,6 +48,7 @@ const Register: React.FC = () => {
                 }
             })
             .catch(err => {
+                console.error(err);
                 setEmail("");
                 setPassword("");
                 setPassword2("");
